@@ -20,23 +20,18 @@ const PageLayout = ({
 }: PageLayoutProps) => {
   return (
     <div className="max-w-6xl mx-auto p-6">
-      {/* Centered Logo Section */}
-      <div className="flex justify-start mb-6">
-        {/* 
-          Logo Container:
-          - w-32 h-32: 128x128px size (much larger than before)
-          - You can adjust size using:
-            - w-24 h-24: 96x96px (smaller)
-            - w-32 h-32: 128x128px (current)
-            - w-40 h-40: 160x160px (larger)
-            - w-48 h-48: 192x192px (even larger)
-        */}
-        <div className="flex-shrink-0 w-64 h-32">
-          <img
-            src="https://i.imgur.com/YmicuRC.png"  // Replace with your Imgur logo URL
-            alt="Xeddy Logo"
-            className="w-full h-full object-contain"
-          />
+      {/* Logo Section */}
+      <div className="flex justify-end mb-6">
+        {/* Logo and Text Container */}
+        <div className="flex items-center gap-3">
+          <span className="font-bold text-lg">Powered by</span>
+          <div className="flex-shrink-0 w-24 h-24">
+            <img
+              src="https://i.imgur.com/YmicuRC.png"
+              alt="Xeddy Logo"
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
       </div>
 

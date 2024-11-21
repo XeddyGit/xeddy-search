@@ -57,7 +57,7 @@ const RestaurantDirectory = () => {
   // Component render
   return (
     <PageLayout
-      title="Off Campus Directory (powered by Xeddy)"
+      title="Off Campus Directory (OCD)"
       searchPlaceholder="Search by restaurant name or menu item..."
       searchValue={nameSearch}
       onSearchChange={setNameSearch}
@@ -88,7 +88,7 @@ const RestaurantDirectory = () => {
           ))}
         </select>
         
-        {/* Campus Card Filter */}
+        {/* Campus Card Filter 
         <label className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -98,8 +98,9 @@ const RestaurantDirectory = () => {
           />
           <span>Campus Card Only</span>
         </label>
+        */}
       </div>
-
+      
       {/* Results Count */}
       <div className="mb-4 text-gray-600">
         Found {filteredRestaurants.length} restaurant{filteredRestaurants.length !== 1 ? 's' : ''}
