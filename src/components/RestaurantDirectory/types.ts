@@ -22,5 +22,7 @@ export interface Restaurant {
         grubhub?: boolean;
         inhouse?: boolean;
     };
+    latitude: number;
+    longitude: number;
     imageUrl: string;
 }

@@ -11,6 +11,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "0.2 miles",
     rating: 4.2,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
       {
         name: "BAKED MAC & CHEESE",
@@ -61,6 +63,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "3.2 miles",
     rating: 4.9,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
         { name: "Margherita Pizza", price: 17.99, description: "Light tomato sauce, fresh mozzarella, basil & tomatoes drizzled with olive oil." },
         { name: "Chicken Pesto Pizza", price: 17.99, description: "Pesto sauce, mozzarella, grilled chicken breast, sun-dried tomatoes, roasted red peppers, red onions, kalamata olives & feta." },
@@ -94,6 +98,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "0.9 miles",
     rating: 4.2,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
 
             { name: "Refried Beans and Egg Taco", price: 3.75, description: "Flour tortilla, scrambled eggs, mozzarella cheese, refried beans and poblano sauce. (Add protein +$0.75)" },
@@ -168,6 +174,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "0.8 miles",
     rating: 4.2,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
         { name: "Dolmeh", price: 5.50, description: "Stuffed veggie grape leaves" },
         { name: "Falafel", price: 6.24, description: "Chickpea patties with tahini sauce" },
@@ -214,6 +222,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "0.9 miles",
     rating: 4.2,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
         { name: "CHICKEN SATAY (4)", price: 7.50, description: "Chicken skewers served with peanut sauce" },
         { name: "LAMB/BEEF/SHRIMP SATAY (4)", price: 8.50, description: "Lamb, beef, or shrimp skewers served with peanut sauce" },
@@ -272,6 +282,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "0.8 miles",
     rating: 4.2,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
         { name: "House Breakfast Plate", price: 10.75, description: "Two eggs your style, Applewood-smoked bacon, and potato fritters with tomato jam and mint parmesan. Served with housemade sourdough. (660 cal, Contains: Milk, Egg, Wheat)" },
         { name: "Sausage Breakfast Sandwich", price: 8.50, description: "Housemade Sujuk-spiced beef sausage with an egg your style*, VT cheddar, fresh tomato, on a housemade challah roll (810 cal, Contains: Wheat, Egg, Milk)" },
@@ -325,6 +337,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "0.2 miles",
     rating: 4.2,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
         { name: "Margherita", price: 18.00, description: "Paradiso Tomato Sauce, Basil, Buffalo Mozzarella", largePrice: 25.00 },
         { name: "Macellaio", price: 18.00, description: "Paradiso Tomato Sauce, Pepperoni, Mozzarella, Pork Sausage, Red Onions", largePrice: 25.00 },
@@ -357,6 +371,8 @@ export const restaurantData: Restaurant[] = [
     acceptsCampusCard: true,
     distance: "1.8 miles",
     rating: 4.2,
+    latitude: 38.9097,
+    longitude: -77.0007,
     menuItems: [
         { name: "A Salad Creation of Your Own", price: 12.29, description: "Be Original by creating your own Salad. Start by picking your base, then add your favorite toppings and dressing." },
         { name: "Grilled Chicken Caesar Salad", price: 11.99, description: "Our Grilled Chicken Caesar comes recommended with a base of Romaine/Iceberg Blend, topped with grilled chicken, parmesan cheese, and croutons." },
