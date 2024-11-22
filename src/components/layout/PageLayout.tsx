@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -18,12 +19,19 @@ const PageLayout = ({
   searchValue = "",
   onSearchChange = () => {}
 }: PageLayoutProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="max-w-6xl mx-auto p-6">
       {/* Logo Section */}
       <div className="flex justify-end mb-6">
         {/* Logo and Text Container */}
-        <div className="flex items-center gap-3">
+        <div 
+          className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => navigate('/')}
+          role="button"
+          tabIndex={0}
+        >
           <span className="font-bold text-lg">Powered by</span>
           <div className="flex-shrink-0 w-24 h-24">
             <img
