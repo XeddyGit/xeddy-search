@@ -11,7 +11,7 @@ export interface Restaurant {
     name: string;
     cuisine: string[];
     address: string;
-    nearestUniversity: string;
+    nearestUniversity: string[];
     acceptsCampusCard: boolean;
     distance: string;
     rating: number;
@@ -22,4 +22,5 @@ export interface Restaurant {
         grubhub?: boolean;
         inhouse?: boolean;
     };
+    imageUrl: string;
 }

@@ -39,7 +39,7 @@ const RestaurantDirectory = () => {
     
     // Check other filters
     const matchesUniversity = selectedUniversity === "All Universities" || 
-      restaurant.nearestUniversity === selectedUniversity;
+      restaurant.nearestUniversity.includes(selectedUniversity);
     const matchesCuisineDropdown = selectedCuisine === "All Cuisines" || 
       restaurant.cuisine.includes(selectedCuisine.toLowerCase());
     const matchesCampusCard = !showOnlyCampusCard || restaurant.acceptsCampusCard;
@@ -127,13 +127,29 @@ const RestaurantDirectory = () => {
                   <MapPin className="h-4 w-4 mr-2" />
                   <span>{restaurant.address} ({restaurant.distance})</span>
                 </div>
-                <div className="flex items-center text-gray-600">
-                  <School className="h-4 w-4 mr-2" />
-                  <span>{restaurant.nearestUniversity}</span>
-                </div>
-                <div className="flex items-center text-gray-600">
-                  <CreditCard className="h-4 w-4 mr-2" />
-                  <span>{restaurant.acceptsCampusCard ? "Accepts Campus Card" : "No Campus Card"}</span>
+                <div className="space-y-4">
+                  {/* Campus Card Element */}
+                  <div className="flex items-center space-x-2">
+                    <CreditCard className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm font-medium text-gray-800">
+                      {restaurant.acceptsCampusCard ? 'Accepts Campus Card' : 'No Campus Card'}
+                    </span>
+                  </div>
+
+                  {/* University Elements - Now handles multiple */}
+                  <div className="flex flex-wrap gap-2">
+                    {restaurant.nearestUniversity.map((university: string, index: number) => (
+                      <div 
+                        key={index}
+                        className="inline-flex items-center space-x-2 px-2 py-1 bg-blue-100 rounded-md"
+                      >
+                        <School className="w-4 h-4 text-blue-600" />
+                        <span className="text-sm font-medium text-blue-600">
+                          {university}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 {/* Cuisine Tags */}
                 <div className="flex flex-wrap gap-2 mt-2">

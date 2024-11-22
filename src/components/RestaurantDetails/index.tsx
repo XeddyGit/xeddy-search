@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { restaurantData } from '../RestaurantDirectory/data';
 import PageLayout from '../layout/PageLayout';
+import { CreditCard, School } from 'lucide-react';
 
 const RestaurantDetails = () => {
   const { restaurantId } = useParams<{ restaurantId: string }>();
@@ -43,32 +44,58 @@ const RestaurantDetails = () => {
       onSearchChange={setMenuSearch}
     >
       <Card>
+        {restaurant.imageUrl && (
+          <div className="relative w-full h-64 mb-4">
+            <img
+              src={restaurant.imageUrl}
+              alt={restaurant.name}
+              className="w-full h-full object-cover rounded-t-lg"
+            />
+          </div>
+        )}
+
         <CardHeader>
           <CardTitle className="text-3xl font-bold">{restaurant.name}</CardTitle>
-          <div className="space-y-2">
-            <p className="text-gray-600">{restaurant.address} - {restaurant.distance}</p>
-            <p className="text-gray-500">{restaurant.nearestUniversity}</p>
+          <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <span className={`px-3 py-1 rounded-full text-sm ${
-                restaurant.acceptsCampusCard 
-                  ? 'bg-green-100 text-green-800' 
-                  : 'bg-gray-100 text-gray-800'
-              }`}>
-                {restaurant.acceptsCampusCard ? "Accepts Campus Card" : "No Campus Card"}
-              </span>
-              <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
-                ★ {restaurant.rating}
+              <CreditCard className="w-4 h-4 text-gray-500" />
+              <span className="text-sm font-medium text-gray-800">
+                {restaurant.acceptsCampusCard ? 'Accepts Campus Card' : 'No Campus Card'}
               </span>
             </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {restaurant.cuisine.map(type => (
-                <span
-                  key={type}
-                  className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
+
+            <div className="flex flex-wrap gap-2">
+              {restaurant.nearestUniversity.map((university: string, index: number) => (
+                <div 
+                  key={index}
+                  className="inline-flex items-center space-x-2 px-2 py-1 bg-blue-100 rounded-md"
                 >
-                  {type.charAt(0).toUpperCase() + type.slice(1)}
-                </span>
+                  <School className="w-4 h-4 text-blue-600" />
+                  <span className="text-sm font-medium text-blue-600">
+                    {university}
+                  </span>
+                </div>
               ))}
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-gray-600">{restaurant.address} - {restaurant.distance}</p>
+              <p className="text-gray-500">{restaurant.nearestUniversity}</p>
+              <div className="flex items-center space-x-2">
+                <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
+                  ★ {restaurant.rating}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {restaurant.cuisine.map(type => (
+                  <span
+                    key={type}
+                    className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
+                  >
+                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </CardHeader>
