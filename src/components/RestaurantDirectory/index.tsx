@@ -23,33 +23,17 @@ const RestaurantDirectory = () => {
   const [view, setView] = useState<'list' | 'map'>('list');
 
   // Filter restaurants based on all criteria
-  const filteredRestaurants = restaurantData.filter(restaurant => {
-    // Check if restaurant name matches search
-    const matchesName = restaurant.name.toLowerCase().includes(nameSearch.toLowerCase());
-    
-    // Check if any menu item matches search
-    const matchesMenuItem = restaurant.menuItems.some(item => 
-      item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
-      item.description.toLowerCase().includes(nameSearch.toLowerCase())
-    );
-    
-    // Check if any cuisine type matches search
-    const matchesCuisineSearch = cuisineSearch === "" || 
-      restaurant.cuisine.some(cuisine => 
-        cuisine.toLowerCase().includes(cuisineSearch.toLowerCase())
-      );
-    
-    // Check other filters
-    const matchesUniversity = selectedUniversity === "All Universities" || 
-      restaurant.nearestUniversity.includes(selectedUniversity);
-    const matchesCuisineDropdown = selectedCuisine === "All Cuisines" || 
-      restaurant.cuisine.includes(selectedCuisine.toLowerCase());
-    const matchesCampusCard = !showOnlyCampusCard || restaurant.acceptsCampusCard;
-    
-    // Return true if name OR menu items match, AND all other criteria match
-    return (matchesName || matchesMenuItem) && matchesCuisineSearch && 
-           matchesUniversity && matchesCuisineDropdown && matchesCampusCard;
-  });
+  const filteredRestaurants = useMemo(() => {
+    return restaurantData.filter(restaurant => {
+      const matchesUniversity = selectedUniversity === "All Universities" || 
+        restaurant.nearestUniversity.includes(selectedUniversity);
+      
+      const matchesCuisineDropdown = selectedCuisine === "All Cuisines" || 
+        restaurant.cuisine.includes(selectedCuisine.toLowerCase());
+
+      return matchesUniversity && matchesCuisineDropdown;
+    });
+  }, [restaurantData, selectedUniversity, selectedCuisine]);
 
   // Handler to navigate to restaurant menu
   const handleRestaurantClick = (restaurantId: number | string) => {
@@ -58,8 +42,8 @@ const RestaurantDirectory = () => {
 
   // Wrap MapView in a component that only mounts once
   const MapViewWrapper = useMemo(() => (
-    <MapView restaurants={filteredRestaurants} />
-  ), [filteredRestaurants]);
+    <MapView restaurants={filteredRestaurants} selectedUniversity={selectedUniversity} />
+  ), [filteredRestaurants, selectedUniversity]);
 
   // Component render
   return (
@@ -267,8 +251,13 @@ const RestaurantDirectory = () => {
           ))}
         </div>
       ) : (
-        <div className="h-[600px] bg-gray-100 rounded-lg">
-          {MapViewWrapper}
+        <div>
+          <div style={{ height: '400px', width: '100%' }}>
+            <MapView 
+              restaurants={filteredRestaurants} 
+              selectedUniversity={selectedUniversity} 
+            />
+          </div>
         </div>
       )}
     </PageLayout>
