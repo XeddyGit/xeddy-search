@@ -1,5 +1,6 @@
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { Restaurant } from './RestaurantDirectory/types';
+import { useState } from 'react';
 
 interface MapViewProps {
   restaurants: Restaurant[];
@@ -8,6 +9,8 @@ interface MapViewProps {
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
 
 const MapView: React.FC<MapViewProps> = ({ restaurants }) => {
+  const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
+
   const center = {
     lat: 38.9072,
     lng: -77.0369
@@ -40,9 +43,24 @@ const MapView: React.FC<MapViewProps> = ({ restaurants }) => {
               lat: restaurant.latitude,
               lng: restaurant.longitude
             }}
-            title={restaurant.name}
+            onClick={() => setSelectedRestaurant(restaurant)}
           />
         ))}
+
+        {selectedRestaurant && (
+          <InfoWindow
+            position={{
+              lat: selectedRestaurant.latitude,
+              lng: selectedRestaurant.longitude
+            }}
+            onCloseClick={() => setSelectedRestaurant(null)}
+          >
+            <div>
+              <h3>{selectedRestaurant.name}</h3>
+              <p>Rating: {selectedRestaurant.rating}/5</p>
+            </div>
+          </InfoWindow>
+        )}
       </GoogleMap>
     </LoadScript>
   );
