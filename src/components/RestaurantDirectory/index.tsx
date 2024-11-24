@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 // Import required icons
-import { Search, MapPin, CreditCard, School, Bike, UtensilsCrossed, List, Map } from 'lucide-react';
+import { Search, MapPin, CreditCard, School, Bike, UtensilsCrossed, List, Map, Star } from 'lucide-react';
 // Import UI components
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 // Import data from data.ts
@@ -25,15 +25,26 @@ const RestaurantDirectory = () => {
   // Filter restaurants based on all criteria
   const filteredRestaurants = useMemo(() => {
     return restaurantData.filter(restaurant => {
+      // Check if matches university filter
       const matchesUniversity = selectedUniversity === "All Universities" || 
         restaurant.nearestUniversity.includes(selectedUniversity);
       
+      // Check if matches cuisine filter
       const matchesCuisineDropdown = selectedCuisine === "All Cuisines" || 
         restaurant.cuisine.includes(selectedCuisine.toLowerCase());
 
-      return matchesUniversity && matchesCuisineDropdown;
+      // Check if matches search term (restaurant name or menu items)
+      const searchTerm = nameSearch.toLowerCase().trim();
+      const matchesSearch = searchTerm === "" || 
+        restaurant.name.toLowerCase().includes(searchTerm) ||
+        restaurant.menuItems.some(item => 
+          item.name.toLowerCase().includes(searchTerm) ||
+          item.description.toLowerCase().includes(searchTerm)
+        );
+
+      return matchesUniversity && matchesCuisineDropdown && matchesSearch;
     });
-  }, [restaurantData, selectedUniversity, selectedCuisine]);
+  }, [selectedUniversity, selectedCuisine, nameSearch]);
 
   // Handler to navigate to restaurant menu
   const handleRestaurantClick = (restaurantId: number | string) => {
@@ -51,45 +62,38 @@ const RestaurantDirectory = () => {
       title="Off Campus Directory (OCD)"
       searchPlaceholder="Search by restaurant name or menu item..."
       searchValue={nameSearch}
-      onSearchChange={setNameSearch}
+      onSearchChange={(value) => setNameSearch(value)}
     >
-      {/* Filter Section */}
-      <div className="flex flex-wrap gap-4 mb-6">
-        {/* University Filter */}
-        <select
-          className="p-2 border rounded-lg"
-          value={selectedUniversity}
-          onChange={(e) => setSelectedUniversity(e.target.value)}
-        >
-          {universities.map(uni => (
-            <option key={uni} value={uni}>{uni}</option>
-          ))}
-        </select>
-        
-        {/* Cuisine Dropdown Filter */}
-        <select
-          className="p-2 border rounded-lg"
-          value={selectedCuisine}
-          onChange={(e) => setSelectedCuisine(e.target.value)}
-        >
-          {cuisineTypes.map(cuisine => (
-            <option key={cuisine} value={cuisine}>
-              {cuisine.charAt(0).toUpperCase() + cuisine.slice(1)}
-            </option>
-          ))}
-        </select>
-        
-        {/* Campus Card Filter 
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            checked={showOnlyCampusCard}
-            onChange={(e) => setShowOnlyCampusCard(e.target.checked)}
-            className="rounded"
-          />
-          <span>Campus Card Only</span>
-        </label>
-        */}
+      {/* Filter Section with Search */}
+      <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+        {/* Filters Row */}
+        <div className="flex flex-wrap gap-4">
+          <select
+            className="flex-1 min-w-[200px] p-3 rounded-lg border border-gray-200 
+                       hover:border-blue-500 focus:border-blue-500 focus:ring-2 
+                       focus:ring-blue-200 transition-all appearance-none bg-white"
+            value={selectedUniversity}
+            onChange={(e) => setSelectedUniversity(e.target.value)}
+          >
+            {universities.map(uni => (
+              <option key={uni} value={uni}>{uni}</option>
+            ))}
+          </select>
+          
+          <select
+            className="flex-1 min-w-[200px] p-3 rounded-lg border border-gray-200 
+                       hover:border-blue-500 focus:border-blue-500 focus:ring-2 
+                       focus:ring-blue-200 transition-all appearance-none bg-white"
+            value={selectedCuisine}
+            onChange={(e) => setSelectedCuisine(e.target.value)}
+          >
+            {cuisineTypes.map(cuisine => (
+              <option key={cuisine} value={cuisine}>
+                {cuisine.charAt(0).toUpperCase() + cuisine.slice(1)}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       
       {/* Results Count */}
@@ -102,10 +106,10 @@ const RestaurantDirectory = () => {
         <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg w-fit">
           <button
             onClick={() => setView('list')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-colors ${
+            className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all ${
               view === 'list' 
-                ? 'bg-white shadow text-blue-600' 
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white shadow-md text-blue-600 scale-105' 
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
             <List className="w-4 h-4" />
@@ -132,116 +136,119 @@ const RestaurantDirectory = () => {
           {filteredRestaurants.map(restaurant => (
             <Card 
               key={restaurant.id} 
-              className="hover:shadow-lg transition-shadow cursor-pointer"
+              className="group hover:shadow-lg transition-all duration-200 cursor-pointer 
+                         bg-white border-gray-100 hover:-translate-y-1"
               onClick={() => handleRestaurantClick(restaurant.id)}
             >
-              <CardHeader>
+              <CardHeader className="pb-2">
                 <CardTitle className="flex justify-between items-start">
-                  <span>{restaurant.name}</span>
-                  <span className="text-sm font-normal">★ {restaurant.rating}</span>
+                  <span className="text-lg font-semibold text-gray-900">{restaurant.name}</span>
+                  <span className="flex items-center gap-1 bg-gray-50 group-hover:bg-gray-100 
+                                 px-3 py-1 rounded-full text-sm font-medium transition-colors">
+                    <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                    {restaurant.rating}
+                  </span>
                 </CardTitle>
+                
+                {/* Location and Distance */}
+                <div className="flex items-center text-gray-600 text-sm mt-2">
+                  <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <span className="truncate">{restaurant.address} ({restaurant.distance})</span>
+                </div>
               </CardHeader>
+
               <CardContent>
-                <div className="space-y-2">
-                  {/* Restaurant Details */}
-                  <div className="flex items-center text-gray-600">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    <span>{restaurant.address} ({restaurant.distance})</span>
-                  </div>
-                  <div className="space-y-4">
-                    {/* Campus Card Element */}
-                    <div className="flex items-center space-x-2">
-                      <CreditCard className="w-4 h-4 text-gray-500" />
-                      <span className="text-sm font-medium text-gray-800">
-                        {restaurant.acceptsCampusCard ? 'Accepts Campus Card' : 'No Campus Card'}
+                {/* Cuisine Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {restaurant.cuisine.map(type => (
+                    <span
+                      key={type}
+                      className="px-3 py-1 bg-gray-50 group-hover:bg-gray-100 
+                               rounded-full text-sm text-gray-600 transition-colors"
+                    >
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </span>
+                  ))}
+                </div>
+
+                {/* University Affiliations */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {restaurant.nearestUniversity.map((university, index) => (
+                    <div 
+                      key={index}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 
+                               bg-blue-50 group-hover:bg-blue-100 rounded-lg transition-colors"
+                    >
+                      <School className="w-4 h-4 text-blue-600" />
+                      <span className="text-sm font-medium text-blue-700">
+                        {university}
                       </span>
                     </div>
+                  ))}
+                </div>
 
-                    {/* University Elements - Now handles multiple */}
-                    <div className="flex flex-wrap gap-2">
-                      {restaurant.nearestUniversity.map((university: string, index: number) => (
-                        <div 
-                          key={index}
-                          className="inline-flex items-center space-x-2 px-2 py-1 bg-blue-100 rounded-md"
-                        >
-                          <School className="w-4 h-4 text-blue-600" />
-                          <span className="text-sm font-medium text-blue-600">
-                            {university}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Cuisine Tags */}
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {restaurant.cuisine.map(type => (
-                      <span
-                        key={type}
-                        className="px-2 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
-                      >
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                {/* Delivery Services - Enhanced */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <Bike className="h-4 w-4 text-gray-500" />
+                  <div className="flex flex-wrap gap-2">
+                    {restaurant.delivery.doordash && (
+                      <span className="px-3 py-1 bg-red-50 text-red-700 rounded-full text-xs font-medium
+                                     group-hover:bg-red-100 transition-colors">
+                        DoorDash
                       </span>
-                    ))}
+                    )}
+                    {restaurant.delivery.ubereats && (
+                      <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium
+                                     group-hover:bg-green-100 transition-colors">
+                        UberEats
+                      </span>
+                    )}
+                    {restaurant.delivery.grubhub && (
+                      <span className="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-medium
+                                     group-hover:bg-orange-100 transition-colors">
+                        GrubHub
+                      </span>
+                    )}
+                    {restaurant.delivery.inhouse && (
+                      <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium
+                                     group-hover:bg-blue-100 transition-colors flex items-center gap-1">
+                        <UtensilsCrossed className="h-3 w-3" />
+                        In-house
+                      </span>
+                    )}
                   </div>
+                </div>
 
-                  {/* Delivery Information */}
-                  <div className="flex items-center gap-2 text-gray-600 mt-2">
-                    <Bike className="h-4 w-4" />
-                    <div className="flex flex-wrap gap-2">
-                      {restaurant.delivery.doordash && (
-                        <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
-                          DoorDash
-                        </span>
-                      )}
-                      {restaurant.delivery.ubereats && (
-                        <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
-                          UberEats
-                        </span>
-                      )}
-                      {restaurant.delivery.grubhub && (
-                        <span className="px-2 py-1 bg-orange-100 text-orange-800 rounded-full text-xs">
-                          GrubHub
-                        </span>
-                      )}
-                      {restaurant.delivery.inhouse && (
-                        <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs flex items-center gap-1">
-                          <UtensilsCrossed className="h-3 w-3" />
-                          In-house
-                        </span>
-                      )}
-                      {!restaurant.delivery.doordash && 
-                       !restaurant.delivery.ubereats && 
-                       !restaurant.delivery.grubhub && 
-                       !restaurant.delivery.inhouse && (
-                        <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">
-                          No Delivery
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Popular Menu Items - Now with search highlight */}
-                  <div className="mt-4">
-                    <h3 className="font-semibold mb-2">Popular Items</h3>
+                {/* Popular Items - Enhanced */}
+                <div className="mt-6">
+                  <h3 className="font-semibold text-gray-900 mb-3">Popular Items</h3>
+                  <div className="space-y-2">
                     {restaurant.menuItems
                       .filter(item => 
                         !nameSearch || 
                         item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
-                        item.description.toLowerCase().includes(nameSearch.toLowerCase())
+                        item.description.toLowerCase().includes(nameSearch.toLowerCase()) ||
+                        restaurant.name.toLowerCase().includes(nameSearch.toLowerCase())
                       )
                       .slice(0, 3)
                       .map(item => (
-                        <div key={item.name} className="flex justify-between text-sm text-gray-700 mb-1">
-                          <span className={
+                        <div 
+                          key={item.name} 
+                          className="flex justify-between items-center py-1 group-hover:bg-gray-50 
+                                    rounded-lg transition-colors px-2"
+                        >
+                          <span className={`text-sm text-gray-700 ${
                             nameSearch && 
                             (item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
                              item.description.toLowerCase().includes(nameSearch.toLowerCase()))
-                              ? "bg-yellow-100"
+                              ? "bg-yellow-100 px-1 rounded"
                               : ""
-                          }>
+                          }`}>
                             {item.name}
                           </span>
-                          <span>${item.price.toFixed(2)}</span>
+                          <span className="text-sm font-medium text-gray-900">
+                            ${item.price.toFixed(2)}
+                          </span>
                         </div>
                       ))}
                   </div>
