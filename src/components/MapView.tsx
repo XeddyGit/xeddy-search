@@ -31,7 +31,7 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
       const uniCoords = universityCoordinates[selectedUniversity];
       if (uniCoords) {
         mapRef.setCenter(uniCoords);
-        mapRef.setZoom(15); // Adjust zoom level as needed
+        mapRef.setZoom(12); // Adjust zoom level as needed
       }
     }
   }, [selectedUniversity, mapRef]);
@@ -51,7 +51,7 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
       center={selectedUniversity !== 'All Universities' 
         ? universityCoordinates[selectedUniversity] 
         : defaultCenter}
-      zoom={14}  // Adjust this value as needed
+      zoom={12}  // Adjust this value as needed
       options={{
         disableDefaultUI: true,
         zoomControl: true,
@@ -62,8 +62,8 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
         <Marker
           position={universityCoordinates[selectedUniversity]}
           icon={{
-            url: '/university-marker.png', // Add your custom university marker icon
-            scaledSize: new window.google.maps.Size(40, 40)
+            url: '', // Add your custom university marker icon
+            scaledSize: new window.google.maps.Size(80, 40)
           }}
         />
       )}
@@ -90,7 +90,17 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
           onCloseClick={() => setSelectedRestaurant(null)}
         >
           <div>
-            <h3>{selectedRestaurant.name}</h3>
+            <img 
+              src={selectedRestaurant.imageUrl} 
+              alt={selectedRestaurant.name}
+              style={{ 
+                width: '200px',  // Adjust size as needed
+                height: '150px', // Adjust size as needed
+                objectFit: 'cover',
+                marginBottom: '8px'
+              }} 
+            />
+            <h2 className="text-lg font-bold">{selectedRestaurant.name}</h2>
             <p>Rating: {selectedRestaurant.rating}/5</p>
           </div>
         </InfoWindow>
