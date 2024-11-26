@@ -1,6 +1,7 @@
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { useState, useEffect } from 'react';
 import { Restaurant } from './RestaurantDirectory/types';
+import { useNavigate } from 'react-router-dom';
 
 interface MapViewProps {
   restaurants: Restaurant[];
@@ -18,6 +19,7 @@ const universityCoordinates: Record<string, { lat: number; lng: number }> = {
 function MapView({ restaurants, selectedUniversity }: MapViewProps) {
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
+  const navigate = useNavigate();
 
   // Default center (e.g., Washington DC area)
   const defaultCenter = {
@@ -83,40 +85,18 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
       {/* Info Window */}
       {selectedRestaurant && (
         <InfoWindow
-          position={{
-            lat: selectedRestaurant.latitude,
-            lng: selectedRestaurant.longitude
-          }}
+          position={{ lat: selectedRestaurant.latitude, lng: selectedRestaurant.longitude }}
           onCloseClick={() => setSelectedRestaurant(null)}
-          options={{
-            maxWidth: 300,
-            pixelOffset: new window.google.maps.Size(0, -5)
-          }}
         >
-          <div style={{ maxWidth: '280px' }}>
+          <div className="max-w-[200px]" onClick={() => navigate(`/restaurant/${selectedRestaurant.id}`)}>
             <img 
               src={selectedRestaurant.imageUrl} 
               alt={selectedRestaurant.name}
-              style={{ 
-                width: '100%',
-                height: '120px',
-                objectFit: 'cover',
-                marginBottom: '8px',
-                borderRadius: '4px'
-              }} 
+              className="w-full h-32 object-cover rounded-lg mb-2"
             />
-            <h2 className="text-lg font-bold mb-1">{selectedRestaurant.name}</h2>
-            <p className="mb-1">Rating: {selectedRestaurant.rating}/5</p>
-            <div className="flex flex-wrap gap-1">
-              {selectedRestaurant.nearestUniversity.map((university, index) => (
-                <span 
-                  key={index}
-                  className="inline-flex items-center px-2 py-0.5 bg-blue-100 rounded-md text-xs text-blue-600"
-                >
-                  {university}
-                </span>
-              ))}
-            </div>
+            <h3 className="font-bold text-blue-600 text-lg mb-1 hover:underline cursor-pointer">{selectedRestaurant.name}</h3>
+            <p className="text-sm text-gray-600">{selectedRestaurant.address}</p>
+
           </div>
         </InfoWindow>
       )}
