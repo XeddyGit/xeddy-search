@@ -5,7 +5,7 @@ import { Search, MapPin, CreditCard, School, Bike, UtensilsCrossed, List, Map, S
 // Import UI components
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 // Import data from data.ts
-import { restaurantData, universities, cuisineTypes } from './data';
+import { restaurants, universities, cuisineTypes } from './data/index';
 import PageLayout from '../layout/PageLayout';
 import MapView from '../MapView';
 
@@ -24,7 +24,7 @@ const RestaurantDirectory = () => {
 
   // Filter restaurants based on all criteria
   const filteredRestaurants = useMemo(() => {
-    return restaurantData.filter(restaurant => {
+    return restaurants.filter(restaurant => {
       // Check if matches university filter
       const matchesUniversity = selectedUniversity === "All Universities" || 
         restaurant.nearestUniversity.includes(selectedUniversity);

@@ -6,6 +6,7 @@ import { tatte } from './restaurants/tatte';
 import { pizzeriaParadiso } from './restaurants/pizzeriaParadiso';
 import { saladworks } from './restaurants/saladworks';
 import { bullfrogBagels } from './restaurants/bullfrogBagels';
+import { satayClub } from './restaurants/satayClub';
 
 export const restaurants = [
   wingos,
@@ -15,7 +16,8 @@ export const restaurants = [
   tatte,
   pizzeriaParadiso,
   saladworks,
-  bullfrogBagels
+  bullfrogBagels, 
+  satayClub
 ];
 
 export const universities = [

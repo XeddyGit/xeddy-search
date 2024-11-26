@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-import { restaurantData } from '../RestaurantDirectory/data';
+import { restaurants } from '../RestaurantDirectory/data/index';
 import PageLayout from '../layout/PageLayout';
 import { CreditCard, School } from 'lucide-react';
 
@@ -10,7 +10,7 @@ const RestaurantDetails = () => {
   const [menuSearch, setMenuSearch] = useState("");
   const [imageErrors, setImageErrors] = useState<{ [key: string]: boolean }>({});
 
-  const restaurant = restaurantData.find(r => r.id === parseInt(restaurantId!));
+  const restaurant = restaurants.find(r => r.id === parseInt(restaurantId!));
   
   const filteredMenuItems = restaurant?.menuItems.filter(item =>
     item.name.toLowerCase().includes(menuSearch.toLowerCase()) ||
