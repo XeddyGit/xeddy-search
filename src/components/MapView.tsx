@@ -88,20 +88,35 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
             lng: selectedRestaurant.longitude
           }}
           onCloseClick={() => setSelectedRestaurant(null)}
+          options={{
+            maxWidth: 300,
+            pixelOffset: new window.google.maps.Size(0, -5)
+          }}
         >
-          <div>
+          <div style={{ maxWidth: '280px' }}>
             <img 
               src={selectedRestaurant.imageUrl} 
               alt={selectedRestaurant.name}
               style={{ 
-                width: '200px',  // Adjust size as needed
-                height: '150px', // Adjust size as needed
+                width: '100%',
+                height: '120px',
                 objectFit: 'cover',
-                marginBottom: '8px'
+                marginBottom: '8px',
+                borderRadius: '4px'
               }} 
             />
-            <h2 className="text-lg font-bold">{selectedRestaurant.name}</h2>
-            <p>Rating: {selectedRestaurant.rating}/5</p>
+            <h2 className="text-lg font-bold mb-1">{selectedRestaurant.name}</h2>
+            <p className="mb-1">Rating: {selectedRestaurant.rating}/5</p>
+            <div className="flex flex-wrap gap-1">
+              {selectedRestaurant.nearestUniversity.map((university, index) => (
+                <span 
+                  key={index}
+                  className="inline-flex items-center px-2 py-0.5 bg-blue-100 rounded-md text-xs text-blue-600"
+                >
+                  {university}
+                </span>
+              ))}
+            </div>
           </div>
         </InfoWindow>
       )}
