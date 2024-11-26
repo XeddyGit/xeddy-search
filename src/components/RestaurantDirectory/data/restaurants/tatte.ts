@@ -1,0 +1,57 @@
+import { Restaurant } from '../../types';
+
+export const tatte: Restaurant = {
+  id: 6,
+  name: "Tatte Bakery & Cafe",
+  imageUrl: "https://i.imgur.com/QVUoZhE.png",
+  cuisine: ["bakery", "cafe", "desserts"],
+  address: "2424 18th St NW, Washington, DC 20009",
+  nearestUniversity: ["American University"],
+  acceptsCampusCard: true,
+  distance: "0.5 miles",
+  rating: 4.2,
+  latitude: 38.9166,
+  longitude: -77.0466,
+  menuItems: [
+    { name: "House Breakfast Plate", price: 10.75, description: "Two eggs your style, Applewood-smoked bacon, and potato fritters with tomato jam and mint parmesan. Served with housemade sourdough. (660 cal, Contains: Milk, Egg, Wheat)" },
+        { name: "Sausage Breakfast Sandwich", price: 8.50, description: "Housemade Sujuk-spiced beef sausage with an egg your style*, VT cheddar, fresh tomato, on a housemade challah roll (810 cal, Contains: Wheat, Egg, Milk)" },
+        { name: "Smoked Salmon, Avocado, & Egg Sandwich", price: 12.75, description: "Smoked salmon, avocado, red onion, capers, alfalfa sprouts, and creamy scrambled eggs served on a housemade challah roll with green herbed dressing. (630 cal, Contains: Wheat, Milk, Egg, Soy, Fish)" },
+        { name: "Breakfast Sandwich", price: 10.00, description: "Eggs your style, Vermont cheddar, and applewood smoked bacon on housemade sourdough. (870 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Croissant Breakfast Sandwich", price: 11.25, description: "Egg your style, Vermont cheddar, sliced tomato, avocado, and baby arugula on housemade croissant. (680 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Halloumi & Sunny-Side Breakfast Sandwich", price: 9.85, description: "Seared halloumi cheese, griddled tomatoes, and sautéed spinach with a sunny-side up egg on our house-made challah roll. (520 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Croque Monsieur", price: 12.85, description: "Housemade croissant, ham, Gruyere and Mornay sauce. (660 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Croque Madame", price: 13.85, description: "Housemade croissant, ham, Gruyere, egg your style, and Mornay sauce. (790 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Lamb Hash", price: 15.25, description: "Lamb cooked with warm spices sautéed with potatoes, sweet potatoes, carrots, pickled red cabbage, and topped with a poached egg and green dressing. Served with roasted garlic labneh, tomato salad, and housemade challah. (930 cal, Contains: Wheat, Milk, Egg, Soy)" },
+        { name: "Egg in the Hole", price: 13.50, description: "Two fried eggs nestled in a housemade sesame Jerusalem bagel, served with chopped salad. (680 cal, Contains: Wheat, Milk, Egg, Sesame)" },
+        { name: "Egg in the Hole with Ham & Cheese", price: 15.00, description: "Two fried eggs, ham, and Vermont cheddar cheese nestled in a sesame Jerusalem bagel, served with chopped salad. (860 cal, Contains: Wheat, Milk, Egg, Sesame)" },
+        { name: "Prosciutto & Parmesan Scrambled Egg Plate", price: 10.75, description: "Two eggs soft scrambled served with prosciutto, Parmesan, and toasted housemade sourdough. (640 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Tomato & Goat Cheese Scrambled Egg Plate", price: 10.75, description: "Two eggs soft scrambled served with ricotta goat cheese mousse and sun-dried cherry tomatoes marinated in garlic and olive oil served with toasted housemade sourdough. You can add on sautéed spinach. (690 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Warm Oatmeal & Fruit", price: 7.25, description: "Warm oatmeal topped with fresh blueberries, orange blossom honey-soaked dried apricots and golden raisins, black sesame, sunflower and pumpkin seeds with a ginger date syrup. (Contains: Sesame)" },
+        { name: "Muesli", price: 7.25, description: "Whipped Greek yogurt topped with housemade granola, raspberries, blueberries, blackberries, pear, apple, honey, and black sesame. (670 / 980 cal, Contains: Milk, Sesame, Tree Nut - Almond, Cashew)" },
+        { name: "Bread & Butter", price: 6.00, description: "Toasted housemade bread served with butter and housemade jam. (710 cal, Contains: Wheat, Milk, Egg, Sesame)" },
+        { name: "Roasted Salmon Sandwich", price: 16.50, description: "Roasted salmon served with herbed mayo, arugula, red onion, pickled red cabbage, sumac, and tomato on a housemade challah roll. (1010 cal, Contains: Wheat, Egg, Soy, Fish)" },
+        { name: "BLAT", price: 12.75, description: "Applewood smoked bacon, baby lettuce, avocado, sriracha mayonnaise, and tomato-onion relish on housemade challah. (870 cal, Contains: Wheat, Egg, Soy)" },
+        { name: "Turkey BLAT", price: 13.00, description: "Turkey, applewood smoked bacon, baby lettuce, avocado, sriracha mayonnaise, and tomato-onion relish on housemade multigrain. (840 cal, Contains: Wheat, Egg, Soy)" },
+        { name: "Chicken Pita", price: 12.75, description: "Roasted chicken breast with a chopped salad of tomatoes, cucumber, red onion, parsley, baby lettuce, and green herb dressing in a pita. (500 cal, Contains: Wheat, Milk, Egg, Soy)" },
+        { name: "Lamb Kebab Pita", price: 14.00, description: "Lamb kebab with a chopped salad of tomatoes, cucumber, red onion, parsley served with dill labneh in a warm pita. (710 cal, Contains: Wheat, Milk)" },
+        { name: "Chicken Salad Sandwich", price: 12.75, description: "Housemade herbed chicken salad with raisins, marinated cucumbers, and baby lettuce, served with a green herb dressing on housemade multigrain. (860 cal, Contains: Wheat, Milk, Egg, Soy)" },
+        { name: "Turkey Avocado Sandwich", price: 12.75, description: "Turkey, avocado, baby lettuce, cucumbers, with a green herb dressing on housemade challah. (730 cal, Contains: Wheat, Milk, Egg, Soy)" },
+        { name: "Broccolini & Squash Hummus Pita", price: 12.25, description: "Roasted broccolini, butternut squash hummus, roasted mushrooms, and pickled cabbage with a green tahini sauce. (Contains: Wheat, Sesame)" },
+        { name: "Fresh Mozzarella Sandwich", price: 12.25, description: "Fresh mozzarella, sliced tomatoes, baby arugula, and basil pine nut pesto on housemade ciabatta. (940 cal, Contains: Wheat, Milk, Tree Nut - Pine)" },
+        { name: "Roasted Cauliflower Sandwich", price: 12.25, description: "Roasted cauliflower, pine nuts, spiced labneh, golden raisins, chilies, cilantro, and capers on pita. (520 cal, Contains: Wheat, Milk, Tree Nut - Pine)" },
+        { name: "Tuna Sandwich", price: 12.75, description: "Olive oil packed tuna salad, hardboiled egg, shaved red onion, yogurt and dill served on housemade challah. (870 cal, Contains: Wheat, Milk, Egg, Fish)" },
+        { name: "Prosciutto & Fig Panini", price: 13.25, description: "Fig jam, brie, fontina cheese, prosciutto and sliced Bosc pear on housemade ciabatta. (990 cal, Contains: Wheat, Milk)" },
+        { name: "Short Rib Grilled Cheese Sandwich", price: 13.25, description: "Braised short rib, beet-horseradish relish and cheddar on housemade challah. (640 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Grilled Cheese", price: 11.00, description: "Fontina, VT Cheddar, parmesan, sundried tomato, roasted garlic, capers, dijon mustard, parsley and thyme spread on a housemade sourdough. (850 cal, Contains: Wheat, Milk)" },
+        { name: "Kids Sandwich", price: 6.00, description: "A classic Tatte sandwich. Toasted challah bread with sliced cheddar cheese. (430 cal, Contains: Wheat, Milk, Egg)" },
+        { name: "Smoked Salmon and Avocado Tartine", price: 14.00, description: "Smoked Salmon, avocado, Campari tomatoes, red onion, capers, and dill tossed with olive oil served over toasted housemade sourdough with green herbed dressing. (740 cal, Contains: Wheat, Milk, Egg, Soy, Fish)" },
+        { name: "Avocado Tartine", price: 13.00, description: "Avocado, baby arugula, dill, and radish with poached eggs on sourdough. (670 cal, Contains: Wheat, Egg)" }
+
+  ],
+  delivery: {
+    doordash: true,
+    ubereats: true,
+    grubhub: true,
+    inhouse: false
+  }
+}; 

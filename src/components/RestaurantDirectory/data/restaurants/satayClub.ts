@@ -1,0 +1,63 @@
+import { Restaurant } from '../../types';
+
+export const satayClub: Restaurant = {
+  id: 10,
+  name: "Satay Club",
+  imageUrl: "https://i.imgur.com/example.png", // Replace with actual image URL
+  cuisine: ["asian", "malaysian", "singaporean"],
+  address: "3401 K St NW, Washington, DC 20007",
+  nearestUniversity: ["Georgetown University"],
+  acceptsCampusCard: true,
+  distance: "0.3 miles",
+  rating: 4.3,
+  latitude: 38.9033,
+  longitude: -77.0694,
+  menuItems: [
+    { name: "CHICKEN SATAY (4)", price: 7.50, description: "Chicken skewers served with peanut sauce" },
+    { name: "LAMB/BEEF/SHRIMP SATAY (4)", price: 8.50, description: "Lamb, beef, or shrimp skewers served with peanut sauce" },
+    { name: "SATAY TOFU", price: 7.95, description: "Served with cucumbers, bean sprouts, and peanut sauce" },
+    { name: "ROTI CANAI (2)", price: 6.95, description: "Indian pancakes served with curry sauce" },
+    { name: "THAI LETTUCE WRAPS", price: 9.95, description: "Served with grilled chicken, assorted vegetables, and peanut sauce" },
+    { name: "HOMEMADE BBQ SPARE RIBS (3)", price: 8.95, description: "BBQ ribs served with house sauce" },
+    { name: "VEGETABLE SPRING ROLLS (3)", price: 4.50, description: "Crispy spring rolls filled with mixed vegetables" },
+    { name: "VIETNAMESE SUMMER ROLLS (2)", price: 7.95, description: "Shrimp, vegetables, mango, and vermicelli noodles wrapped in fresh rice paper. Served with hoisin sauce" },
+    { name: "FRIED CALAMARI", price: 9.95, description: "Fried calamari served with dipping sauce" },
+    { name: "VIETNAMESE SPRING ROLLS (2)", price: 7.95, description: "Deep fried rolls with minced pork, fresh crabmeat, and cellophane noodles" },
+    { name: "PORK DUMPLINGS (5)", price: 7.95, description: "Choice of steamed or pan-fried pork dumplings" },
+    { name: "VEGETABLE DUMPLINGS (5)", price: 7.95, description: "Choice of steamed or pan-fried vegetable dumplings" },
+    { name: "SHU MAI (6)", price: 6.95, description: "Shrimp dumplings. Choice of steamed or deep fried" },
+    { name: "ROCK SHRIMP TEMPURA (6)", price: 9.95, description: "Coated with spicy mayo. Served with a house salad" },
+    { name: "PEKING DUCK CREPE (2)", price: 9.95, description: "Stuffed with duck strips, ginger, scallions, and hoisin sauce" },
+    { name: "CRAB RANGOON (5)", price: 7.95, description: "Crab and cream cheese wontons, fried to golden crispiness" },
+    { name: "EDAMAME", price: 6.50, description: "Boiled soybeans with sea salt" },
+    { name: "GREEN SALAD", price: 6.95, description: "Mixed greens with ginger dressing" },
+    { name: "AVOCADO SALAD", price: 7.95, description: "Mixed greens, avocado, fried onion, sweet chili sauce, and ranch dressing" },
+    { name: "GINGER SALAD", price: 7.50, description: "Fresh cabbage, carrots, pickled ginger, peanuts, and deep fried shallots with ginger dressing" },
+    { name: "SPICY CRUNCHY SALMON SALAD", price: 8.50, description: "Raw salmon with spicy mayo and tempura flakes" },
+    { name: "SEAWEED SALAD", price: 6.95, description: "Mixed seaweed with sesame oil and soy sauce" },
+    { name: "MISO SOUP", price: 3.95, description: "Classic Japanese miso broth with tofu and seaweed" },
+    { name: "HOT AND SOUR SOUP", price: 4.50, description: "Spicy and tangy soup with mushrooms, tofu, and bamboo shoots" },
+    { name: "WONTON SOUP", price: 4.50, description: "Deep fried chicken wontons in a chicken broth" },
+    { name: "TOM YUM SOUP", price: 4.95, description: "Spicy Thai soup with shrimp, mushrooms, and lemongrass" },
+    { name: "LEMONGRASS COCONUT SOUP", price: 4.95, description: "Coconut-based soup with lemongrass and chicken" },
+    { name: "NASI LEMAK", price: 16.95, description: "Coconut rice, sambal shrimp, fried egg, peanuts, indian chips, chicken satay, and fried chicken" },
+    { name: "SAMBAL SHRIMP AND SQUID", price: 17.95, description: "Shrimp and squid stir fried with spicy sambal paste" },
+    { name: "SALT AND PEPPER SHRIMP", price: 17.95, description: "Jumbo shrimp lightly battered and deep fried with spicy salt and garlic. Served with a salad mix" },
+    { name: "RENDANG BEEF", price: 18.95, description: "Coconut beef stew served with slices of cucumber and Indian crackers" },
+    { name: "MALAYSIAN RED CURRY", price: 14.95, description: "Choice of protein served with eggplant, string beans, fried tofu, carrots, and cabbage" },
+    { name: "PEKING DUCK", price: 23.95, description: "Sliced roasted duck served with pancakes (4), scallions, and hoisin sauce" },
+    { name: "GREEN CURRY", price: 16.95, description: "Choice of protein served with tomatoes, eggplant, string bean, fried tofu, and basil leaves" },
+    { name: "THAI RED CURRY SHRIMP", price: 17.95, description: "Jumbo shrimp with basil leaves, eggplant, fried tofu, and string beans" },
+    { name: "RED SNAPPER", price: 17.95, description: "Choice of ginger and scallion sauce or Thai spicy sauce" },
+    { name: "SHREDDED PORK WITH HOT PEPPERS", price: 15.95, description: "Shredded pork stir fried with hot peppers" },
+    { name: "CRISPY BEEF", price: 17.95, description: "Deep fried beef in a crispy batter with sweet and spicy sauce" },
+    { name: "BLACK PEPPER STEAK", price: 18.95, description: "Beef steak stir fried with black pepper sauce" }
+
+  ],
+  delivery: {
+    doordash: true,
+    ubereats: true,
+    grubhub: false,
+    inhouse: false
+  }
+}; 
