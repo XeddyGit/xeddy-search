@@ -11,7 +11,7 @@ export const mamanJoon: Restaurant = {
   distance: "0.8 miles",
   rating: 4.2,
   latitude: 38.94896,
-  longitude: 77.07992,
+  longitude: -77.07992,
   menuItems: [
     { name: "Dolmeh", price: 5.50, description: "Stuffed veggie grape leaves" },
         { name: "Falafel", price: 6.24, description: "Chickpea patties with tahini sauce" },

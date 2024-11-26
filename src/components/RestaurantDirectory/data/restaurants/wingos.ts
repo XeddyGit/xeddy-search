@@ -5,13 +5,13 @@ export const wingos: Restaurant = {
   name: "Wingo's",
   imageUrl: "https://i.imgur.com/LKXBwav.png",
   cuisine: ["american", "appetizers", "comfort food"],
-  address: "Glover Park – 2301 Wisconsin Ave NW",
+  address: "2218 Wisconsin Ave NW, Washington, D.C. 20007",
   nearestUniversity: ["Georgetown University", "American University", "George Washington University"],
   acceptsCampusCard: true,
   distance: "0.2 miles",
   rating: 4.2,
-  latitude: 38.9097,
-  longitude: -77.0007,
+  latitude: 38.9197,
+  longitude: -77.0711,
   menuItems: [
     {
       name: "BAKED MAC & CHEESE",

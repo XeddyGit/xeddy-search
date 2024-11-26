@@ -5,13 +5,13 @@ export const tatte: Restaurant = {
   name: "Tatte Bakery & Cafe",
   imageUrl: "https://i.imgur.com/QVUoZhE.png",
   cuisine: ["bakery", "cafe", "desserts"],
-  address: "2424 18th St NW, Washington, DC 20009",
+  address: "13 Ridge Square, Washington, D.C. 20016",
   nearestUniversity: ["American University"],
   acceptsCampusCard: true,
   distance: "0.5 miles",
   rating: 4.2,
-  latitude: 38.9166,
-  longitude: -77.0466,
+  latitude: 38.94079,
+  longitude: -77.07792,
   menuItems: [
     { name: "House Breakfast Plate", price: 10.75, description: "Two eggs your style, Applewood-smoked bacon, and potato fritters with tomato jam and mint parmesan. Served with housemade sourdough. (660 cal, Contains: Milk, Egg, Wheat)" },
         { name: "Sausage Breakfast Sandwich", price: 8.50, description: "Housemade Sujuk-spiced beef sausage with an egg your style*, VT cheddar, fresh tomato, on a housemade challah roll (810 cal, Contains: Wheat, Egg, Milk)" },
@@ -46,7 +46,7 @@ export const tatte: Restaurant = {
         { name: "Kids Sandwich", price: 6.00, description: "A classic Tatte sandwich. Toasted challah bread with sliced cheddar cheese. (430 cal, Contains: Wheat, Milk, Egg)" },
         { name: "Smoked Salmon and Avocado Tartine", price: 14.00, description: "Smoked Salmon, avocado, Campari tomatoes, red onion, capers, and dill tossed with olive oil served over toasted housemade sourdough with green herbed dressing. (740 cal, Contains: Wheat, Milk, Egg, Soy, Fish)" },
         { name: "Avocado Tartine", price: 13.00, description: "Avocado, baby arugula, dill, and radish with poached eggs on sourdough. (670 cal, Contains: Wheat, Egg)" }
-
+ 
   ],
   delivery: {
     doordash: true,
