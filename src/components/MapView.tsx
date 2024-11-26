@@ -11,6 +11,7 @@ const universityCoordinates: Record<string, { lat: number; lng: number }> = {
   'Georgetown University': { lat: 38.9076, lng: -77.0723 },
   'American University': { lat: 38.9365, lng: -77.0878 },
   'George Washington University': { lat: 38.8997, lng: -77.0489 },
+  'Howard University': { lat: 38.9234, lng: -77.0216 },
   // Add other universities as needed
 };
 
