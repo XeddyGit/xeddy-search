@@ -9,6 +9,8 @@ import { bullfrogBagels } from './restaurants/bullfrogBagels';
 import { satayClub } from './restaurants/satayClub';
 import { ocaMocha } from './restaurants/ocaMocha';
 import { sorrentoOfArbutus } from './restaurants/sorrentoOfArbutus';
+import { akiraRamenTowson } from './restaurants/akiraRamenTowson';
+import { kyotoMatcha } from './restaurants/kyotoMatcha';
 export const restaurants = [
   wingos,
   angelicoPizzeria,
@@ -20,7 +22,9 @@ export const restaurants = [
   bullfrogBagels, 
   satayClub,
   ocaMocha,
-  sorrentoOfArbutus
+  sorrentoOfArbutus,
+  akiraRamenTowson, 
+  kyotoMatcha
 ];
 
 export const universities = [
@@ -30,7 +34,7 @@ export const universities = [
     "Howard University", 
     "George Washington University", 
     "University of Maryland Baltimore County", 
-    "Towson University"
+    "Towson University", 
 ];
 
 export const cuisineTypes = [
@@ -47,4 +51,7 @@ export const cuisineTypes = [
     "tea",
     "coffee",
     "seafood",
+    "ramen",
+    "japanese",
+    "fast food"
 ];
