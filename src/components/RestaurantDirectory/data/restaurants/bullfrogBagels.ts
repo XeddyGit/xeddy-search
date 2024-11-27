@@ -1,7 +1,7 @@
 import { Restaurant } from '../../types';
 
 export const bullfrogBagels: Restaurant = {
-  id: 9,
+  id: 8,
   name: "Bullfrog Bagels",
   imageUrl: "https://i.imgur.com/hcVCdit.jpeg",
   cuisine: ["bagels", "breakfast", "sandwiches"],

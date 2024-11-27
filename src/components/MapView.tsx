@@ -13,6 +13,8 @@ const universityCoordinates: Record<string, { lat: number; lng: number }> = {
   'American University': { lat: 38.9365, lng: -77.0878 },
   'George Washington University': { lat: 38.8997, lng: -77.0489 },
   'Howard University': { lat: 38.9234, lng: -77.0216 },
+  'University of Maryland Baltimore County': { lat: 39.2544, lng: -76.7135 },
+  'Towson University': { lat: 39.3937, lng: -76.6066 },
   // Add other universities as needed
 };
 
@@ -96,7 +98,6 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
             />
             <h3 className="font-bold text-blue-600 text-lg mb-1 hover:underline cursor-pointer">{selectedRestaurant.name}</h3>
             <p className="text-sm text-gray-600">{selectedRestaurant.address}</p>
-
           </div>
         </InfoWindow>
       )}

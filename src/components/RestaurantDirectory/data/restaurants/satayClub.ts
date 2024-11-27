@@ -1,7 +1,7 @@
 import { Restaurant } from '../../types';
 
 export const satayClub: Restaurant = {
-  id: 10,
+  id: 9,
   name: "Satay Club",
   imageUrl: "https://i.imgur.com/bXYaN8n.png", // Replace with actual image URL
   cuisine: ["asian", "malaysian", "singaporean"],
@@ -9,7 +9,7 @@ export const satayClub: Restaurant = {
   nearestUniversity: ["Georgetown University"],
   acceptsCampusCard: true,
   distance: "0.3 miles",
-  rating: 4.3,
+  rating: 4.5,
   latitude: 38.9033,
   longitude: -77.0694,
   menuItems: [

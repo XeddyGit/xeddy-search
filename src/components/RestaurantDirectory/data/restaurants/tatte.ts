@@ -1,7 +1,7 @@
 import { Restaurant } from '../../types';
 
 export const tatte: Restaurant = {
-  id: 6,
+  id: 5,
   name: "Tatte Bakery & Cafe",
   imageUrl: "https://i.imgur.com/QVUoZhE.png",
   cuisine: ["bakery", "cafe", "desserts"],

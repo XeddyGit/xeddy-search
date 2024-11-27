@@ -7,7 +7,8 @@ import { pizzeriaParadiso } from './restaurants/pizzeriaParadiso';
 import { saladworks } from './restaurants/saladworks';
 import { bullfrogBagels } from './restaurants/bullfrogBagels';
 import { satayClub } from './restaurants/satayClub';
-
+import { ocaMocha } from './restaurants/ocaMocha';
+import { sorrentoOfArbutus } from './restaurants/sorrentoOfArbutus';
 export const restaurants = [
   wingos,
   angelicoPizzeria,
@@ -17,7 +18,9 @@ export const restaurants = [
   pizzeriaParadiso,
   saladworks,
   bullfrogBagels, 
-  satayClub
+  satayClub,
+  ocaMocha,
+  sorrentoOfArbutus
 ];
 
 export const universities = [
@@ -25,7 +28,9 @@ export const universities = [
     "Georgetown University",
     "American University",
     "Howard University", 
-    "George Washington University"
+    "George Washington University", 
+    "University of Maryland Baltimore County", 
+    "Towson University"
 ];
 
 export const cuisineTypes = [
@@ -38,5 +43,8 @@ export const cuisineTypes = [
     "mexican",
     "tacos",
     "persian",
-    "kabobs"
+    "kabobs",
+    "tea",
+    "coffee",
+    "seafood",
 ];

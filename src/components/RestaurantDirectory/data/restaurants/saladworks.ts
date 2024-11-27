@@ -1,15 +1,15 @@
 import { Restaurant } from '../../types';
 
 export const saladworks: Restaurant = {
-  id: 8,
+  id: 7,
   name: "Saladworks",
-  imageUrl: "https://i.imgur.com/Juzru14.png",
+  imageUrl: "https://i.imgur.com/yLcZoms.jpeg",
   cuisine: ["salad", "healthy", "fast food"],
   address: "320 Florida Avenue NE Washington 20002",
   nearestUniversity: ["Howard University"],
   acceptsCampusCard: true,
   distance: "1.8 miles",
-  rating: 4.2,
+  rating: 4.8,
   latitude: 38.90764,
   longitude: -77.00162,
   menuItems: [
