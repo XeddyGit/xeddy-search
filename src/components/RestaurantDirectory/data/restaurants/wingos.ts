@@ -57,5 +57,6 @@ export const wingos: Restaurant = {
     ubereats: true,
     grubhub: false,
     inhouse: true
-  }
+  },
+  hasDeals: false,
 };

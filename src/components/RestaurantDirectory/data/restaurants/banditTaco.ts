@@ -73,5 +73,6 @@ export const banditTaco: Restaurant = {
     ubereats: true,
     grubhub: true,
     inhouse: false
-  }
+  },
+  hasDeals: false,
 }; 

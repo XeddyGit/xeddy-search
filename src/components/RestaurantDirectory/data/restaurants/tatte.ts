@@ -53,5 +53,6 @@ export const tatte: Restaurant = {
     ubereats: true,
     grubhub: true,
     inhouse: false
-  }
+  },
+  hasDeals: false,
 }; 

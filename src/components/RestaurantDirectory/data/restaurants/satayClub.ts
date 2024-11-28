@@ -59,5 +59,6 @@ export const satayClub: Restaurant = {
     ubereats: true,
     grubhub: false,
     inhouse: false
-  }
+  },
+  hasDeals: false,
 }; 

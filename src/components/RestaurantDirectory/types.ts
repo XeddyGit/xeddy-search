@@ -6,6 +6,12 @@ interface MenuItem {
     imageUrl?: string;
 }
 
+export interface Deal {
+    dealType: string;
+    dealDescription: string;
+    dealCode: string;
+}
+
 export interface Restaurant {
     id: number;
     name: string;
@@ -25,4 +31,6 @@ export interface Restaurant {
     latitude: number;
     longitude: number;
     imageUrl: string;
+    hasDeals: boolean;
+    currentDeal?: Deal;
 }

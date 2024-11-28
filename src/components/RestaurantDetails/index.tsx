@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { restaurants } from '../RestaurantDirectory/data/index';
 import PageLayout from '../layout/PageLayout';
 import { CreditCard, School } from 'lucide-react';
+import { DealButton } from '../DealButton/DealButton';
 
 const RestaurantDetails = () => {
   const { restaurantId } = useParams<{ restaurantId: string }>();
@@ -76,6 +77,12 @@ const RestaurantDetails = () => {
                   </span>
                 </div>
               ))}
+              {restaurant.hasDeals && restaurant.currentDeal && (
+        <DealButton 
+          restaurantName={restaurant.name}
+          dealDetails={restaurant.currentDeal}
+        />
+      )}
             </div>
 
             <div className="space-y-2">
@@ -149,6 +156,7 @@ const RestaurantDetails = () => {
           </div>
         </CardContent>
       </Card>
+
     </PageLayout>
   );
 };

@@ -164,4 +164,5 @@ export const kyotoMatcha: Restaurant = {
         doordash: true,
         ubereats: true,
     },
+    hasDeals: false,
 }

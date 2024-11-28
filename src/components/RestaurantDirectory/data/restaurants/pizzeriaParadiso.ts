@@ -33,5 +33,6 @@ export const pizzeriaParadiso: Restaurant = {
     ubereats: true,
     grubhub: true,
     inhouse: false
-  }
+  },
+  hasDeals: false,
 }; 

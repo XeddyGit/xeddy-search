@@ -47,5 +47,6 @@ export const mamanJoon: Restaurant = {
     ubereats: true,
     grubhub: true,
     inhouse: false
-  }
+  },
+  hasDeals: false,
 }; 

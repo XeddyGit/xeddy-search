@@ -73,4 +73,5 @@ export const sorrentoOfArbutus: Restaurant = {
     grubhub: false,
     inhouse: false,
   },
+  hasDeals: false,
 };

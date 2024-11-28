@@ -37,5 +37,6 @@ export const saladworks: Restaurant = {
     ubereats: true,
     grubhub: true,
     inhouse: false
-  }
+  },
+  hasDeals: false,
 }; 

@@ -70,4 +70,5 @@ export const akiraRamenTowson: Restaurant = {
   },
   latitude: 39.4037,
   longitude: -76.6017,
+  hasDeals: false,
 };

@@ -60,5 +60,11 @@ export const ocaMocha: Restaurant = {
     ubereats: true,
     grubhub: false,
     inhouse: false
+  },
+  hasDeals: true,
+  currentDeal: {
+    dealType: "free",
+    dealDescription: "Free coffee with UberEats or DoorDash order",
+    dealCode: "OCAMOCHA"
   }
 }; 
