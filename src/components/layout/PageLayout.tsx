@@ -1,6 +1,8 @@
 import React from 'react';
-import { Search } from 'lucide-react';
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { useNavigate } from 'react-router-dom';
+import { Search } from 'lucide-react';
+
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -67,6 +69,7 @@ const PageLayout = ({
 
         {/* Page Content */}
         {children}
+        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
       </div>
 
       {/* Footer */}

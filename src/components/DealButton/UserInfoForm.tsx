@@ -33,6 +33,12 @@ export function UserInfoForm({ onSubmit, userInfo, setUserInfo }: UserInfoFormPr
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
           required
         />
+        
+      </div>
+      <div className="flex justify-center">
+        <h3 className="text-sm text-black-500">
+            By submitting your name and phone number, you agree to receive text messages with deals and promotions from this restaurant.
+        </h3>
       </div>
       <button
         type="submit"
