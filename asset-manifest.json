@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/xeddy-search/static/css/main.ca69ae2a.css",
-    "main.js": "/xeddy-search/static/js/main.cc256661.js",
+    "main.css": "/xeddy-search/static/css/main.cdde0338.css",
+    "main.js": "/xeddy-search/static/js/main.0c38bb32.js",
     "static/js/453.8f9c50a5.chunk.js": "/xeddy-search/static/js/453.8f9c50a5.chunk.js",
     "index.html": "/xeddy-search/index.html",
-    "main.ca69ae2a.css.map": "/xeddy-search/static/css/main.ca69ae2a.css.map",
-    "main.cc256661.js.map": "/xeddy-search/static/js/main.cc256661.js.map",
+    "main.cdde0338.css.map": "/xeddy-search/static/css/main.cdde0338.css.map",
+    "main.0c38bb32.js.map": "/xeddy-search/static/js/main.0c38bb32.js.map",
     "453.8f9c50a5.chunk.js.map": "/xeddy-search/static/js/453.8f9c50a5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ca69ae2a.css",
-    "static/js/main.cc256661.js"
+    "static/css/main.cdde0338.css",
+    "static/js/main.0c38bb32.js"
   ]
 }
