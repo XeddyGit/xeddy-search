@@ -19,16 +19,16 @@ const HomePage: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       {/* Header Section */}
       <header className="bg-blue-600 text-white p-4">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Logo Section */}
           <div 
-            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
             onClick={() => navigate('/')}
             role="button"
             tabIndex={0}
           >
             <span className="font-bold text-lg">Powered by</span>
-            <div className="flex-shrink-0 w-24 h-24">
+            <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24">
               <img
                 src="https://i.imgur.com/YmicuRC.png"
                 alt="Xeddy Logo"
@@ -38,10 +38,10 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex space-x-4">
+          <nav className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
             <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/about" className="hover:underline">About</Link>
-            <Link to="/contact" className="hover:underline">Contact</Link>
+            <Link to="/" className="hover:underline">About</Link>
+            <Link to="/" className="hover:underline">Contact</Link>
           </nav>
         </div>
       </header>

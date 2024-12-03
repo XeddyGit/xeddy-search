@@ -30,7 +30,7 @@ const PageLayout = ({
   return (
     <div className="min-h-screen flex flex-col">
       <header className="bg-blue-600 text-white p-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Logo Section */}
           <div 
             className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
@@ -49,10 +49,10 @@ const PageLayout = ({
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex space-x-4">
+          <nav className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
             <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/about" className="hover:underline">About</Link>
-            <Link to="/contact" className="hover:underline">Contact</Link>
+            <Link to="/" className="hover:underline">About</Link>
+            <Link to="/" className="hover:underline">Contact</Link>
           </nav>
         </div>
       </header>
