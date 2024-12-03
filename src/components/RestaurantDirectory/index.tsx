@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // Import required icons
-import { Search, MapPin, CreditCard, School, Bike, UtensilsCrossed, List, Map, Star } from 'lucide-react';
+import { MapPin, School, Bike, UtensilsCrossed, List, Map, Star } from 'lucide-react';
 // Import UI components
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 // Import data from data.ts
@@ -14,12 +14,32 @@ import MapView from '../MapView';
 const RestaurantDirectory = () => {
   const navigate = useNavigate();
   
+  // Google Analytics Integration
+  useEffect(() => {
+    // Initialize Google Analytics
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    function gtag(...args: any[]) {
+      (window as any).dataLayer.push(args);
+    }
+    gtag('js', new Date());
+    gtag('config', "G-M4M7D5SNCX"); // Replace with your tracking ID
+
+    // Load Google Analytics script
+    const script = document.createElement('script');
+    script.src = `https://www.googletagmanager.com/gtag/js?id=G-M4M7D5SNCX`; // Replace with your tracking ID
+    script.async = true;
+    document.head.appendChild(script);
+    
+    return () => {
+      // Cleanup script on component unmount
+      document.head.removeChild(script);
+    };
+  }, []);
+
   // State management for filters and searches
   const [nameSearch, setNameSearch] = useState("");
-  const [cuisineSearch, setCuisineSearch] = useState("");
   const [selectedUniversity, setSelectedUniversity] = useState("All Universities");
   const [selectedCuisine, setSelectedCuisine] = useState("All Cuisines");
-  const [showOnlyCampusCard, setShowOnlyCampusCard] = useState(false);
   const [view, setView] = useState<'list' | 'map'>('list');
 
   // Filter restaurants based on all criteria
@@ -50,11 +70,6 @@ const RestaurantDirectory = () => {
   const handleRestaurantClick = (restaurantId: number | string) => {
     navigate(`/restaurant/${restaurantId}`);
   };
-
-  // Wrap MapView in a component that only mounts once
-  const MapViewWrapper = useMemo(() => (
-    <MapView restaurants={filteredRestaurants} selectedUniversity={selectedUniversity} />
-  ), [filteredRestaurants, selectedUniversity]);
 
   // Component render
   return (

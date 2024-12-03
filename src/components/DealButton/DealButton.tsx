@@ -32,11 +32,6 @@ export function DealButton({ restaurantName, dealDetails }: DealButtonProps) {
     // }
   };
 
-  const handleResendCode = async () => {
-    console.log('Resending code to:', userInfo.phone);
-    await handleSubmitInfo({ preventDefault: () => {} } as React.FormEvent);
-  };
-
   return (
     <>
       <button 

@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { Request, Response } from 'express';
 import { TwilioService } from '../../../services/twilioService';
 import { storeVerificationCode } from '../../../utils/verification';
 import { validatePhoneNumber } from '../../../utils/validation';
@@ -6,8 +6,8 @@ import { logger } from '../../../utils/logger';
 import { limiter } from '../../../middleware';
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: Request,
+  res: Response
 ) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });

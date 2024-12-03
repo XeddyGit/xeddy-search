@@ -1,8 +1,7 @@
-import React from 'react';
-import { GoogleAnalytics } from '@next/third-parties/google'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-
+import ReactGA from 'react-ga';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -23,12 +22,16 @@ const PageLayout = ({
 }: PageLayoutProps) => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    ReactGA.initialize('G-M4M7D5SNCX'); // Replace with your tracking ID
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="max-w-6xl mx-auto p-6 flex-grow">
-        {/* Logo Section */}
-        <div className="flex justify-end mb-6">
-          {/* Logo and Text Container */}
+      <header className="bg-blue-600 text-white p-4">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          {/* Logo Section */}
           <div 
             className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
             onClick={() => navigate('/')}
@@ -44,8 +47,17 @@ const PageLayout = ({
               />
             </div>
           </div>
-        </div>
 
+          {/* Navigation Links */}
+          <nav className="flex space-x-4">
+            <Link to="/" className="hover:underline">Home</Link>
+            <Link to="/about" className="hover:underline">About</Link>
+            <Link to="/contact" className="hover:underline">Contact</Link>
+          </nav>
+        </div>
+      </header>
+
+      <div className="max-w-6xl mx-auto p-6 flex-grow">
         {/* Header Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-6">{title}</h1>
@@ -69,7 +81,6 @@ const PageLayout = ({
 
         {/* Page Content */}
         {children}
-        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
       </div>
 
       {/* Footer */}
