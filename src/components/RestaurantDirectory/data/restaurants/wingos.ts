@@ -59,4 +59,5 @@ export const wingos: Restaurant = {
     inhouse: true
   },
   hasDeals: false,
+  addressLink: 'https://www.google.com/search?q=wingos+dc&sca_esv=bc90c0cb48f9edae&ei=DrRPZ4qzMNef5NoPpoj0qAI&ved=0ahUKEwiK8trp_oyKAxXXD1kFHSYEHSUQ4dUDCA8&uact=5&oq=wingos+dc&gs_lp=Egxnd3Mtd2l6LXNlcnAiCXdpbmdvcyBkYzIOEC4YgAQYxwEYjgUYrwEyBRAAGIAEMg4QLhiABBjHARiOBRivATIIEAAYFhgKGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjICECYyAhAmMh0QLhiABBjHARiOBRivARiXBRjcBBjeBBjgBNgBAUjeHVDTDFjaGXACeAGQAQCYAWGgAfUBqgEBM7gBA8gBAPgBAZgCBaACrALCAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICHBAuGIAEGLADGEMYxwEYyAMYigUYjgUYrwHYAQHCAhkQLhiABBiwAxjRAxhDGMcBGMgDGIoF2AEBwgIKEAAYgAQYQxiKBcICEBAuGIAEGEMYxwEYigUYrwHCAggQABiABBiiBJgDAIgGAZAGFLoGBggBEAEYCJIHAzQuMaAHryE&sclient=gws-wiz-serp'
 };

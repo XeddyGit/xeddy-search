@@ -17,6 +17,7 @@ export interface Restaurant {
     name: string;
     cuisine: string[];
     address: string;
+    addressLink?: string;
     nearestUniversity: string[];
     acceptsCampusCard: boolean;
     distance: string;

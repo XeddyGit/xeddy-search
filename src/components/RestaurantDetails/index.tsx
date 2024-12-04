@@ -86,8 +86,17 @@ const RestaurantDetails = () => {
             </div>
 
             <div className="space-y-2">
-              <p className="text-gray-600">{restaurant.address} - {restaurant.distance}</p>
-              <p className="text-gray-500">{restaurant.nearestUniversity}</p>
+              <div className="address">
+                <a 
+                  href={restaurant.addressLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.address)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-blue-600 hover:underline"
+                >
+                  {restaurant.address}
+                </a>
+              </div>
+        
               <div className="flex items-center space-x-2">
                 <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
                   ★ {restaurant.rating}
