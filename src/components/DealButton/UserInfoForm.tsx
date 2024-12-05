@@ -35,10 +35,17 @@ export function UserInfoForm({ onSubmit, userInfo, setUserInfo }: UserInfoFormPr
         />
         
       </div>
-      <div className="flex justify-center">
-        <h3 className="text-sm text-black-500">
-            By submitting your name and phone number, you agree to receive text messages with deals and promotions from this restaurant.
-        </h3>
+      <div className="flex justify-center items-center">
+        <input
+          type="checkbox"
+          id="agreement"
+          className="mr-2"
+          required
+        />
+        <label htmlFor="agreement" className="text-sm text-black-500">
+        I agree to receive promotional text messages and marketing communications from Xeddy about deals and offers from restaurants. Standard messaging rates may apply. Reply STOP to opt out.
+
+        </label>
       </div>
       <button
         type="submit"
