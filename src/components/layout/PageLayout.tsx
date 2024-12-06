@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ const PageLayout = ({
 
   useEffect(() => {
     ReactGA.initialize('G-M4M7D5SNCX'); // Replace with your tracking ID
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
   }, []);
 
   return (
