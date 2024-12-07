@@ -6,7 +6,8 @@ WORKDIR /app
 COPY package.json ./
 COPY . ./
 
-RUN npm install
+# Clean install and force package resolution
+RUN rm -rf node_modules package-lock.json && npm install
 
 EXPOSE 3001
 
