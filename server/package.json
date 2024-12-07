@@ -1,0 +1,11 @@
+{
+  "name": "xeddy-search-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.4",
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7"
+  }
+} 

@@ -68,6 +68,7 @@ const RestaurantDirectory = () => {
 
   // Handler to navigate to restaurant menu
   const handleRestaurantClick = (restaurantId: number | string) => {
+    console.log('Restaurant clicked:', restaurantId);
     navigate(`/restaurant/${restaurantId}`);
   };
 

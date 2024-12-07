@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { restaurants } from '../RestaurantDirectory/data/index';
 import PageLayout from '../layout/PageLayout';
 import { CreditCard, School } from 'lucide-react';
-import { DealButton } from '../DealButton/DealButton';
+import { EDealButton } from '../EmailDealButton/EDealButton';
 
 const RestaurantDetails = () => {
   const { restaurantId } = useParams<{ restaurantId: string }>();
@@ -78,7 +78,7 @@ const RestaurantDetails = () => {
                 </div>
               ))}
               {restaurant.hasDeals && restaurant.currentDeal && (
-        <DealButton 
+        <EDealButton 
           restaurantName={restaurant.name}
           dealDetails={restaurant.currentDeal}
         />
