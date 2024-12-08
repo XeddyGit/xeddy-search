@@ -50,7 +50,7 @@
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
     "deploy": "npm run build && gcloud builds submit --tag gcr.io/xeddy-search/react && gcloud run deploy search-service --image gcr.io/xeddy-search/react --platform managed",
-    "deploy:backend": "cd server && gcloud builds submit --tag gcr.io/xeddy-search/backend . && gcloud run deploy email-service --image gcr.io/xeddy-search/backend --platform managed --set-env-vars SENDGRID_API_KEY=${REACT_APP_SENDGRID_API_KEY}"
+    "deploy:backend": "cd server && gcloud builds submit --tag gcr.io/xeddy-search/backend . && gcloud run deploy email-service --image gcr.io/xeddy-search/backend --platform managed --set-env-vars REACT_APP_SENDGRID_API_KEY=${REACT_APP_SENDGRID_API_KEY},REACT_APP_SENDGRID_VERIFIED_SENDER=${REACT_APP_SENDGRID_VERIFIED_SENDER}"
   },
   "eslintConfig": {
     "extends": [
