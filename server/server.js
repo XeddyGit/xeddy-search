@@ -4,7 +4,15 @@ const cors = require('cors');
 const sgMail = require('@sendgrid/mail');
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://ocd.xeddy.app' // Production URL
+    : 'http://localhost:3000', // Development URL
+  methods: ['GET', 'POST'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 console.log('SendGrid API Key:', process.env.REACT_APP_SENDGRID_API_KEY ? 'Present' : 'Missing');
