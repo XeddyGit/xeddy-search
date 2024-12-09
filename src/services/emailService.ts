@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import axios from 'axios';
 
 // Use environment variable for the backend URL, fallback to localhost for development
@@ -8,6 +10,7 @@ console.log('REACT_APP_BACKEND_PROD_URL:', process.env.REACT_APP_BACKEND_PROD_UR
 console.log('REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL);
 
 const BACKEND_URL = process.env.NODE_ENV === 'production' 
+
   ? process.env.REACT_APP_BACKEND_PROD_URL 
   : process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
 
