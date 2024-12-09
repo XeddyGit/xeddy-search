@@ -6,7 +6,7 @@ const sgMail = require('@sendgrid/mail');
 const app = express();
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
-    ? 'https://ocd.xeddy.app' // Production URL
+    ? 'https://ocd.joinxeddy.com' // Production URL
     : 'http://localhost:3000', // Development URL
   methods: ['GET', 'POST'],
   credentials: true,
@@ -65,6 +65,10 @@ app.post('/api/send-email', async (req, res) => {
       details: error.response?.body || error.message
     });
   }
+});
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Email Service API');
 });
 
 const PORT = process.env.PORT || 3001;

@@ -2,7 +2,7 @@
   "name": "xeddy-search",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://XeddyGit.github.io/xeddy-search",
+  "homepage": "https://ocd.joinxeddy.com",
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@prisma/client": "^5.22.0",
