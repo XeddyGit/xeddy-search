@@ -3,6 +3,8 @@ import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-d
 import HomePage from './components/Screen/HomePage'
 import RestaurantDirectory from './components/RestaurantDirectory';
 import RestaurantDetails from './components/RestaurantDetails';
+import AboutPage from './components/Screen/AboutPage';
+import ContactPage from './components/Screen/ContactPage';
 import './index.css';
 import { LoadScript } from '@react-google-maps/api';
 import ReactGA from 'react-ga4';
@@ -21,9 +23,11 @@ function App() {
         <PageTracker />
         <div className="App">
           <Routes>
-           // <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/directory" element={<RestaurantDirectory />} />
             <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </div>
       </Router>

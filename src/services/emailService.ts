@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import axios from 'axios';
 
 // Use environment variable for the backend URL, fallback to localhost for development
