@@ -11,4 +11,7 @@ RUN rm -rf node_modules package-lock.json && npm install
 
 EXPOSE 3001
 
+# Set environment to production
+ENV NODE_ENV=production
+
 CMD ["node", "server.js"] 

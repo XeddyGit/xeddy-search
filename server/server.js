@@ -5,13 +5,30 @@ const sgMail = require('@sendgrid/mail');
 
 const app = express();
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? 'https://ocd.joinxeddy.com' // Production URL
-    : 'http://localhost:3000', // Development URL
-  methods: ['GET', 'POST'],
-  credentials: true,
-};
+    origin: [
+      'https://ocd.joinxeddy.com',  // Production frontend URL
+      'http://localhost:3000',      // Development URL
+      // Add any other allowed origins
+    ],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  };
 
+// Add more detailed logging for CORS and server startup
+console.log('Current Environment:', process.env.NODE_ENV);
+console.log('Allowed Origin:', corsOptions.origin);
+
+// Add a catch-all error handler
+app.use((err, req, res, next) => {
+  console.error('Unhandled Error:', err);
+  res.status(500).json({
+    error: 'Unexpected server error',
+    details: err.message
+  });
+});
+
+app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(express.json());
 

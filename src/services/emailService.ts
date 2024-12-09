@@ -2,35 +2,51 @@ import axios from 'axios';
 
 // Use environment variable for the backend URL, fallback to localhost for development
 console.log('Backend URL:', process.env.REACT_APP_BACKEND_PROD_URL);
+console.log('Full Environment:', process.env);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('REACT_APP_BACKEND_PROD_URL:', process.env.REACT_APP_BACKEND_PROD_URL);
+console.log('REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL);
 
 const BACKEND_URL = process.env.NODE_ENV === 'production' 
   ? process.env.REACT_APP_BACKEND_PROD_URL 
   : process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
 
 export const sendDealEmail = async (email: string, dealDetails: string) => {
-  console.log('sendDealEmail called with:', { email, dealDetails });
-  
+  const config = {
+    method: 'post',
+    url: `${BACKEND_URL}/api/send-email`,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    timeout: 10000, // 10 second timeout
+    data: { email, dealDetails }
+  };
+
   try {
-    const response = await axios({
-      method: 'post',
-      url: `${BACKEND_URL}/api/send-email`,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: { email, dealDetails }
-    });
-    console.log('Email sent successfully to:', email);
+    console.log('Sending request with config:', config);
+    const response = await axios(config);
+    console.log('Full axios response:', response);
     return response;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error('Email sending failed:', {
-        status: error.response?.status,
-        message: error.response?.data || error.message,
-        serverError: error.response?.data
-      });
-      throw new Error(`Failed to send email: ${error.response?.data?.message || error.message}`);
+  } catch (error: any) {
+    console.error('Detailed Axios Error:', {
+      message: error.message,
+      code: error.code,
+      status: error.response?.status,
+      data: error.response?.data,
+      headers: error.response?.headers,
+      config: error.config
+    });
+
+    // More specific error handling
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      throw new Error(`Server responded with ${error.response.status}: ${JSON.stringify(error.response.data)}`);
+    } else if (error.request) {
+      // The request was made but no response was received
+      throw new Error('No response received from server. Check network connectivity.');
+    } else {
+      // Something happened in setting up the request
+      throw new Error(`Request setup error: ${error.message}`);
     }
-    console.error('Unexpected error:', error);
-    throw error;
   }
 };
