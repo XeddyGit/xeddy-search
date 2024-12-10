@@ -11,6 +11,7 @@ import ReactGA from 'react-ga4';
 
 function App() {
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string;
+  
 
   useEffect(() => {
     ReactGA.initialize('G-M4M7D5SNCX');

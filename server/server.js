@@ -16,8 +16,6 @@ const corsOptions = {
   };
 
 // Add more detailed logging for CORS and server startup
-console.log('Current Environment:', process.env.NODE_ENV);
-console.log('Allowed Origin:', corsOptions.origin);
 
 // Add a catch-all error handler
 app.use((err, req, res, next) => {
