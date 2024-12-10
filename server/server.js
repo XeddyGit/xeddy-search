@@ -30,7 +30,7 @@ app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(express.json());
 
-console.log('SendGrid API Key:', process.env.REACT_APP_SENDGRID_API_KEY ? 'Present' : 'Missing');
+
 
 if (!process.env.REACT_APP_SENDGRID_API_KEY) {
   console.error('SendGrid API key is not configured');
@@ -44,11 +44,13 @@ app.post('/api/send-email', async (req, res) => {
 
   if (!process.env.REACT_APP_SENDGRID_API_KEY) {
     console.error('SendGrid API key is missing');
-    return res.status(500).json({
+  {/*  return res.status(500).json({
       error: 'Configuration error',
       details: 'SendGrid API key is not configured'
     });
+    */}
   }
+    
 
   const msg = {
     to: email,
