@@ -3,10 +3,8 @@ import axios from 'axios';
 // Use environment variable for the backend URL, fallback to localhost for development
 
 
-const BACKEND_URL = process.env.NODE_ENV === 'production' 
-
-  ? process.env.REACT_APP_BACKEND_PROD_URL 
-  : process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
+const BACKEND_URL = process.env.REACT_APP_NODE_ENV === 'production' 
+? process.env.REACT_APP_BACKEND_PROD_URL : 'http://localhost:3001';
 
 export const sendDealEmail = async (email: string, dealDetails: string) => {
   const config = {
