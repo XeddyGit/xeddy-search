@@ -55,7 +55,7 @@ app.post('/api/send-email', async (req, res) => {
   const msg = {
     to: email,
     from: process.env.REACT_APP_SENDGRID_VERIFIED_SENDER || 'hello@xeddy.app',
-    subject: `Your Deal from ${restaurantName}`,
+    subject: `Your Fuel Up ⚡ Deal from ${restaurantName}`,
     text: `Thank you for choosing a deal from ${restaurantName}! Here is your deal: ${dealDetails}. Be sure to show this email to the cashier when you get to the register at ${restaurantName}. Best of luck on Finals!`,
     html: `
       <!DOCTYPE html>

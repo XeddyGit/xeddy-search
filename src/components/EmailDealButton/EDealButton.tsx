@@ -63,43 +63,85 @@ export function EDealButton({ restaurantName, dealDetails }: EDealButtonProps) {
 
   return (
     <div>
-      <button onClick={handleOpenModal} className="bg-primary text-white px-4 py-2 rounded-lg">
+      <button onClick={handleOpenModal} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
         Fuel Up ⚡ for Finals Deal
       </button>
       <NewModal isOpen={isModalOpen} onClose={handleCloseModal}>
-      <h2 className="text-xl font-bold font-underline">Dec. 10th - Dec. 16th</h2>
-        <h2 className="text-xl font-bold">Select Your Fuel Up ⚡ Deal for {restaurantName}</h2>
-        <div className="mt-4">
-          <h3 className="text-lg">Available Deals:</h3>
-          <ul>
-            {dealDetails.map((deal, index) => (
-              <li key={index}>
-                <button 
-                  onClick={() => handleDealSelection(deal.dealDescription)} 
-                  className="text-blue-500"
-                >
-                  {deal.dealDescription}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {selectedDeal && (
-          <div className="mt-4">
-            <p className="text-green-600">You have selected: {selectedDeal}</p>
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Enter your UMBC email"
-              className="mt-2 p-2 border rounded w-full"
-            />
-            <button onClick={handleSendDeal} className="mt-2 p-2 bg-blue-500 text-white rounded">
-              Send Deal
-            </button>
-            {error && <p className="text-red-500">{error}</p>}
+        <div className="p-6 max-w-md w-full">
+          {/* Header Section */}
+          <div className="text-center space-y-2 mb-8">
+            <h2 className="text-xl font-bold text-orange-600">Dec. 10th - Dec. 16th</h2>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Select Your Fuel Up ⚡ Deal
+              <span className="block text-primary mt-1">{restaurantName}</span>
+            </h2>
           </div>
-        )}
+
+          {/* Deals Section */}
+          <div className="mt-6">
+            <h3 className="text-lg font-medium text-gray-700 mb-4">Available Deals:</h3>
+            <div className="space-y-3">
+              {dealDetails.map((deal, index) => (
+                <button 
+                  key={index}
+                  onClick={() => handleDealSelection(deal.dealDescription)}
+                  className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                    selectedDeal === deal.dealDescription
+                      ? 'border-primary bg-primary/5'
+                      : 'border-gray-200 hover:border-primary/50 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 rounded-full ${
+                      selectedDeal === deal.dealDescription
+                        ? 'bg-primary/10'
+                        : 'bg-gray-100'
+                    }`}>
+                      {deal.dealType === 'percentage' && '💰'}
+                      {deal.dealType === 'bogo' && '2️⃣'}
+                      {deal.dealType === 'discount' && '🏷️'}
+                    </div>
+                    <span className="font-medium text-gray-800">{deal.dealDescription}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Email Input Section */}
+          {selectedDeal && (
+            <div className="mt-8 space-y-4">
+              <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                <p className="text-green-800 font-medium flex items-center gap-2">
+                  <span>✓</span>
+                  <span>Selected: {selectedDeal}</span>
+                </p>
+              </div>
+              <div className="space-y-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  placeholder="Enter your UMBC email"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                />
+                {error && (
+                  <p className="text-red-500 text-sm flex items-center gap-2">
+                    <span>⚠️</span>
+                    <span>{error}</span>
+                  </p>
+                )}
+              </div>
+              <button 
+                onClick={handleSendDeal}
+                className="w-full bg-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
+              >
+                <span>Send Deal</span>
+                <span>📧</span>
+              </button>
+            </div>
+          )}
+        </div>
       </NewModal>
     </div>
   );
