@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-blue-600 text-white p-4 shadow-lg flex justify-between items-center">
+      <header className="bg-blue-600 text-white p-1 shadow-lg flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')} role="button" tabIndex={0}>
           <span className="font-bold text-lg">Powered by</span>
           <div className="flex-shrink-0 w-24 h-24">

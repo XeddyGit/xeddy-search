@@ -3,7 +3,7 @@ import PageLayout from '../layout/PageLayout';
 
 const ContactPage: React.FC = () => {
   return (
-    <PageLayout title="Contact Us">
+    <PageLayout showSearch={false} title="Contact Us">
       <div className="max-w-4xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
         <p className="mb-4">

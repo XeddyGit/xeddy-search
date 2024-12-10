@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NewModal } from './NewModal';
 import { Deal } from '../RestaurantDirectory/types';
 import { sendDealEmail } from '../../services/emailService';
+import ReactGA from 'react-ga4';
 
 interface EDealButtonProps {
   restaurantName: string;
@@ -53,10 +54,24 @@ export function EDealButton({ restaurantName, dealDetails }: EDealButtonProps) {
       
       await sendDealEmail(email, selectedDeal, restaurantName);
       console.log('Email sent successfully');
+
+      ReactGA.event({
+        category: 'Deals',
+        action: 'deal_email_sent',
+        label: `${restaurantName} - ${selectedDeal}`,
+        value: 1
+      });
+
       alert('Deal sent successfully!');
       handleCloseModal();
     } catch (error) {
-      console.error('Detailed error sending deal:', error);
+      ReactGA.event({
+        category: 'Errors',
+        action: 'deal_email_failed',
+        label: `${restaurantName} - ${(error as Error).message}`,
+        value: 0
+      });
+
       setError('Error sending deal. Please try again.');
     }
   };
@@ -98,7 +113,7 @@ export function EDealButton({ restaurantName, dealDetails }: EDealButtonProps) {
                         : 'bg-gray-100'
                     }`}>
                       {deal.dealType === 'percentage' && '💰'}
-                      {deal.dealType === 'bogo' && '2️⃣'}
+                      {deal.dealType === 'bogo' && '🎓'}
                       {deal.dealType === 'discount' && '🏷️'}
                     </div>
                     <span className="font-medium text-gray-800">{deal.dealDescription}</span>

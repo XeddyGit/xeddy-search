@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
   return (
-    <PageLayout title="About Us">
+    <PageLayout showSearch={false} title="About Us">
       <div className="max-w-4xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-4">Welcome to the Off Campus Directory (OCD)</h2>
         <p className="mb-4">

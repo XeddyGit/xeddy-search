@@ -65,18 +65,13 @@ export const ocaMocha: Restaurant = {
   currentDeal: [
     {
       dealType: "percentage",
-      dealDescription: "50% off coffee drinks before 9am",
+      dealDescription: "First 10 students get 50% off all drinks",
       dealCode: "OCAMORNING"
     },
     {
       dealType: "bogo",
-      dealDescription: "Buy one bagel, get one free after 2pm",
+      dealDescription: "20% off for UMBC students",
       dealCode: "OCABOGO"
     },
-    {
-      dealType: "discount",
-      dealDescription: "1/2 priced bagels",
-      dealCode: "OCABAGEL"
-    }
   ],
 }; 

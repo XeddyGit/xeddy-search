@@ -141,7 +141,7 @@ app.post('/api/send-email', async (req, res) => {
       </body>
       </html>
     `,
-    bcc: 'basil@xeddy.app'
+    bcc: 'basil@xeddy.app, mussie@xeddy.app'
   };
   
 
