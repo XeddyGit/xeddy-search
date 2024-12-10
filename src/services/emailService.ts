@@ -6,7 +6,7 @@ import axios from 'axios';
 const BACKEND_URL = process.env.REACT_APP_NODE_ENV === 'production' 
 ? process.env.REACT_APP_BACKEND_PROD_URL : 'http://localhost:3001';
 
-export const sendDealEmail = async (email: string, dealDetails: string) => {
+export const sendDealEmail = async (email: string, dealDetails: string, restaurantName: string) => {
   const config = {
     method: 'post',
     url: `${BACKEND_URL}/api/send-email`,
@@ -14,7 +14,7 @@ export const sendDealEmail = async (email: string, dealDetails: string) => {
       'Content-Type': 'application/json'
     },
     timeout: 10000, // 10 second timeout
-    data: { email, dealDetails }
+    data: { email, dealDetails, restaurantName }
   };
 
   try {

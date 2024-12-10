@@ -51,7 +51,7 @@ const PageLayout = ({
 
         {/* Navigation Links */}
         <nav className={`flex-col md:flex-row md:flex md:space-x-4 ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
-          <Link to="/" className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors">Home</Link>
+          <Link to="/directory" className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors">Home</Link>
           <Link to="/about" className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors">About</Link>
           <Link to="/contact" className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors">Contact</Link>
         </nav>

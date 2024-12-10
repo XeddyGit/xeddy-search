@@ -2,7 +2,7 @@ import { Restaurant } from '../../types';
 
 export const ocaMocha: Restaurant = {
   id: 10,
-  name: "Oca Mocha",
+  name: "OCA Mocha",
   imageUrl: "https://i.imgur.com/Eh1CoEL.jpeg",
   cuisine: ["coffee", "cafe"],
   address: "5410 East Drive, Arbutus, MD 21227",
@@ -62,9 +62,21 @@ export const ocaMocha: Restaurant = {
     inhouse: false
   },
   hasDeals: true,
-  currentDeal: {
-    dealType: "free",
-    dealDescription: "Free coffee with UberEats or DoorDash order",
-    dealCode: "OCAMOCHA"
-  }
+  currentDeal: [
+    {
+      dealType: "percentage",
+      dealDescription: "50% off coffee drinks before 9am",
+      dealCode: "OCAMORNING"
+    },
+    {
+      dealType: "bogo",
+      dealDescription: "Buy one bagel, get one free after 2pm",
+      dealCode: "OCABOGO"
+    },
+    {
+      dealType: "discount",
+      dealDescription: "1/2 priced bagels",
+      dealCode: "OCABAGEL"
+    }
+  ],
 }; 

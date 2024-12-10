@@ -5,7 +5,7 @@ import { sendDealEmail } from '../../services/emailService';
 
 interface EDealButtonProps {
   restaurantName: string;
-  dealDetails: Deal;
+  dealDetails: Deal[];
 }
 
 export function EDealButton({ restaurantName, dealDetails }: EDealButtonProps) {
@@ -51,7 +51,7 @@ export function EDealButton({ restaurantName, dealDetails }: EDealButtonProps) {
         dealDetails: selectedDeal
       });
       
-      await sendDealEmail(email, selectedDeal);
+      await sendDealEmail(email, selectedDeal, restaurantName);
       console.log('Email sent successfully');
       alert('Deal sent successfully!');
       handleCloseModal();
@@ -64,18 +64,24 @@ export function EDealButton({ restaurantName, dealDetails }: EDealButtonProps) {
   return (
     <div>
       <button onClick={handleOpenModal} className="bg-primary text-white px-4 py-2 rounded-lg">
-        Get Your Deal
+        Fuel Up ⚡ for Finals Deal
       </button>
       <NewModal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <h2 className="text-xl font-bold">Select Your Deal for {restaurantName}</h2>
+      <h2 className="text-xl font-bold font-underline">Dec. 10th - Dec. 16th</h2>
+        <h2 className="text-xl font-bold">Select Your Fuel Up ⚡ Deal for {restaurantName}</h2>
         <div className="mt-4">
           <h3 className="text-lg">Available Deals:</h3>
           <ul>
-            <li>
-              <button onClick={() => handleDealSelection(dealDetails.dealDescription)} className="text-blue-500">
-                {dealDetails.dealDescription}
-              </button>
-            </li>
+            {dealDetails.map((deal, index) => (
+              <li key={index}>
+                <button 
+                  onClick={() => handleDealSelection(deal.dealDescription)} 
+                  className="text-blue-500"
+                >
+                  {deal.dealDescription}
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
         {selectedDeal && (

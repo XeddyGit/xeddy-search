@@ -39,8 +39,8 @@ if (!process.env.REACT_APP_SENDGRID_API_KEY) {
 sgMail.setApiKey(process.env.REACT_APP_SENDGRID_API_KEY);
 
 app.post('/api/send-email', async (req, res) => {
-  const { email, dealDetails } = req.body;
-  console.log('Received request:', { email, dealDetails });
+  const { email, dealDetails, restaurantName } = req.body;
+  console.log('Received request:', { email, dealDetails, restaurantName });
 
   if (!process.env.REACT_APP_SENDGRID_API_KEY) {
     console.error('SendGrid API key is missing');
@@ -55,10 +55,95 @@ app.post('/api/send-email', async (req, res) => {
   const msg = {
     to: email,
     from: process.env.REACT_APP_SENDGRID_VERIFIED_SENDER || 'hello@xeddy.app',
-    subject: 'Your Deal from Our Restaurant',
-    text: `Here is your deal: ${dealDetails}`,
-    html: `<p>Here is your deal: ${dealDetails}</p>`,
+    subject: `Your Deal from ${restaurantName}`,
+    text: `Thank you for choosing a deal from ${restaurantName}! Here is your deal: ${dealDetails}. Be sure to show this email to the cashier when you get to the register at ${restaurantName}. Best of luck on Finals!`,
+    html: `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Deal Confirmation</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  margin: 0;
+                  padding: 0;
+                  background-color: #f9f9f9;
+              }
+              .email-container {
+                  max-width: 600px;
+                  margin: 20px auto;
+                  background: #ffffff;
+                  border: 1px solid #dddddd;
+                  border-radius: 10px;
+                  overflow: hidden;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              }
+              .header {
+                  background: #4CAF50;
+                  color: #ffffff;
+                  text-align: center;
+                  padding: 15px 10px;
+                  font-size: 20px;
+                  font-weight: bold;
+              }
+              .content {
+                  padding: 20px;
+                  text-align: left;
+                  color: #333333;
+              }
+              .content h2 {
+                  color: #4CAF50;
+                  font-size: 18px;
+              }
+              .deal-box {
+                  background: #f0f4f7;
+                  padding: 15px;
+                  margin: 20px 0;
+                  border-left: 4px solid #4CAF50;
+                  border-radius: 5px;
+                  font-size: 16px;
+              }
+              .footer {
+                  text-align: center;
+                  background: #f7f7f7;
+                  padding: 15px 10px;
+                  font-size: 14px;
+                  color: #555555;
+                  border-top: 1px solid #dddddd;
+              }
+              .footer a {
+                  color: #4CAF50;
+                  text-decoration: none;
+              }
+          </style>
+      </head>
+      <body>
+          <div class="email-container">
+              <div class="header">
+                  Thank You for Choosing a Deal!
+              </div>
+              <div class="content">
+                  <p>Hi there,</p>
+                  <p>Thank you for choosing a deal from <strong>${restaurantName}</strong>! 🎉</p>
+                  <h2>Here is your deal:</h2>
+                  <div class="deal-box">
+                      ${dealDetails}
+                  </div>
+                  <p>Be sure to show this email to the cashier when you get to the register at <strong>${restaurantName}</strong>.</p>
+                  <p>Best of luck on Finals! 🍀</p>
+              </div>
+              <div class="footer">
+                  Powered by Xeddy | <a href="#">Unsubscribe</a>
+              </div>
+          </div>
+      </body>
+      </html>
+    `,
+    bcc: 'basil@xeddy.app'
   };
+  
 
   try {
     console.log('Attempting to send email with:', {

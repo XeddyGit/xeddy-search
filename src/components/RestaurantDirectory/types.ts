@@ -33,5 +33,5 @@ export interface Restaurant {
     longitude: number;
     imageUrl: string;
     hasDeals: boolean;
-    currentDeal?: Deal;
+    currentDeal?: Deal[];
 }

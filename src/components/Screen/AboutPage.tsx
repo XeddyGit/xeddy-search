@@ -1,5 +1,6 @@
 import React from 'react';
 import PageLayout from '../layout/PageLayout';
+import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
   return (
@@ -12,8 +13,13 @@ const AboutPage: React.FC = () => {
         </p>
         <h3 className="text-xl font-semibold mt-6 mb-2">Our Mission</h3>
         <p className="mb-4">
-          Our mission is to connect students with local restaurants that accept campus cards, providing a seamless dining experience. 
-          We aim to highlight hidden gems and popular spots alike, ensuring that students have access to a variety of cuisines and dining options.
+        Our mission is to connect students with local restaurants that accept campus cards, providing a seamless dining experience. 
+        We aim to highlight hidden gems and popular spots alike, ensuring that students have access to a variety of cuisines and dining options. 
+        At the same time, we strive to equip small eateries with the best tools to compete with larger chains, enhancing the dining experience for college students through personalized recommendations, loyalty rewards, and community-driven engagement.
+       <br/>
+       <br/>
+       <p>To learn more about our mission to be the best food ordering and rewards app for college students and local restaurants, please visit our <Link className="text-blue-600" to="https://xeddy.app">Xeddy</Link> page.
+       </p>
         </p>
         <h3 className="text-xl font-semibold mt-6 mb-2">Features</h3>
         <ul className="list-disc list-inside mb-4">
@@ -29,7 +35,7 @@ const AboutPage: React.FC = () => {
         </p>
         <h3 className="text-xl font-semibold mt-6 mb-2">Contact Us</h3>
         <p>
-          For any inquiries, please email us at <a href="mailto:support@joinxeddy.com" className="text-blue-600">support@joinxeddy.com</a>.
+          For any inquiries, please email us at <a href="mailto:admin@joinxeddy.com" className="text-blue-600">admin@joinxeddy.com</a>.
         </p>
       </div>
     </PageLayout>

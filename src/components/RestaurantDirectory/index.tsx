@@ -66,6 +66,11 @@ const RestaurantDirectory = () => {
     });
   }, [selectedUniversity, selectedCuisine, nameSearch]);
 
+  // Add new filtered restaurants for deals
+  const restaurantsWithDeals = useMemo(() => {
+    return filteredRestaurants.filter(restaurant => restaurant.hasDeals);
+  }, [filteredRestaurants]);
+
   // Handler to navigate to restaurant menu
   const handleRestaurantClick = (restaurantId: number | string) => {
     console.log('Restaurant clicked:', restaurantId);
@@ -147,132 +152,268 @@ const RestaurantDirectory = () => {
 
       {/* Conditional Rendering based on View */}
       {view === 'list' ? (
-        // Restaurant Cards Grid
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredRestaurants.map(restaurant => (
-            <Card 
-              key={restaurant.id} 
-              className="group hover:shadow-lg transition-all duration-200 cursor-pointer 
-                         bg-white border-gray-100 hover:-translate-y-1"
-              onClick={() => handleRestaurantClick(restaurant.id)}
-            >
-              <CardHeader className="pb-2">
-                <CardTitle className="flex justify-between items-start">
-                  <span className="text-lg font-semibold text-gray-900">{restaurant.name}</span>
-                  <span className="flex items-center gap-1 bg-gray-50 group-hover:bg-gray-100 
-                                 px-3 py-1 rounded-full text-sm font-medium transition-colors">
-                    <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                    {restaurant.rating}
-                  </span>
-                </CardTitle>
-                
-                {/* Location and Distance */}
-                <div className="flex items-center text-gray-600 text-sm mt-2">
-                  <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
-                  <span className="truncate">{restaurant.address} ({restaurant.distance})</span>
-                </div>
-              </CardHeader>
+        <>
+          {/* Show Deals section if there are restaurants with deals */}
+          {restaurantsWithDeals.length > 0 && (
+            <>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Restaurants with Deals</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {restaurantsWithDeals.map(restaurant => (
+                  <Card 
+                    key={restaurant.id} 
+                    className="group hover:shadow-lg transition-all duration-200 cursor-pointer 
+                               bg-white border-gray-100 hover:-translate-y-1"
+                    onClick={() => handleRestaurantClick(restaurant.id)}
+                  >
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex justify-between items-start">
+                        <span className="text-lg font-semibold text-gray-900">{restaurant.name}</span>
+                        <span className="flex items-center gap-1 bg-gray-50 group-hover:bg-gray-100 
+                                       px-3 py-1 rounded-full text-sm font-medium transition-colors">
+                          <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                          {restaurant.rating}
+                        </span>
+                      </CardTitle>
+                      
+                      {/* Location and Distance */}
+                      <div className="flex items-center text-gray-600 text-sm mt-2">
+                        <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <span className="truncate">{restaurant.address} ({restaurant.distance})</span>
+                      </div>
+                    </CardHeader>
 
-              <CardContent>
-                {/* Cuisine Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {restaurant.cuisine.map(type => (
-                    <span
-                      key={type}
-                      className="px-3 py-1 bg-gray-50 group-hover:bg-gray-100 
-                               rounded-full text-sm text-gray-600 transition-colors"
-                    >
-                      {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </span>
-                  ))}
-                </div>
-
-                {/* University Affiliations */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {restaurant.nearestUniversity.map((university, index) => (
-                    <div 
-                      key={index}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 
-                               bg-blue-50 group-hover:bg-blue-100 rounded-lg transition-colors"
-                    >
-                      <School className="w-4 h-4 text-blue-600" />
-                      <span className="text-sm font-medium text-blue-700">
-                        {university}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Delivery Services - Enhanced */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <Bike className="h-4 w-4 text-gray-500" />
-                  <div className="flex flex-wrap gap-2">
-                    {restaurant.delivery.doordash && (
-                      <span className="px-3 py-1 bg-red-50 text-red-700 rounded-full text-xs font-medium
-                                     group-hover:bg-red-100 transition-colors">
-                        DoorDash
-                      </span>
-                    )}
-                    {restaurant.delivery.ubereats && (
-                      <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium
-                                     group-hover:bg-green-100 transition-colors">
-                        UberEats
-                      </span>
-                    )}
-                    {restaurant.delivery.grubhub && (
-                      <span className="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-medium
-                                     group-hover:bg-orange-100 transition-colors">
-                        GrubHub
-                      </span>
-                    )}
-                    {restaurant.delivery.inhouse && (
-                      <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium
-                                     group-hover:bg-blue-100 transition-colors flex items-center gap-1">
-                        <UtensilsCrossed className="h-3 w-3" />
-                        In-house
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Popular Items - Enhanced */}
-                <div className="mt-6">
-                  <h3 className="font-semibold text-gray-900 mb-3">Popular Items</h3>
-                  <div className="space-y-2">
-                    {restaurant.menuItems
-                      .filter(item => 
-                        !nameSearch || 
-                        item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
-                        item.description.toLowerCase().includes(nameSearch.toLowerCase()) ||
-                        restaurant.name.toLowerCase().includes(nameSearch.toLowerCase())
-                      )
-                      .slice(0, 3)
-                      .map(item => (
-                        <div 
-                          key={item.name} 
-                          className="flex justify-between items-center py-1 group-hover:bg-gray-50 
-                                    rounded-lg transition-colors px-2"
-                        >
-                          <span className={`text-sm text-gray-700 ${
-                            nameSearch && 
-                            (item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
-                             item.description.toLowerCase().includes(nameSearch.toLowerCase()))
-                              ? "bg-yellow-100 px-1 rounded"
-                              : ""
-                          }`}>
-                            {item.name}
+                    <CardContent>
+                      {/* Cuisine Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {restaurant.cuisine.map(type => (
+                          <span
+                            key={type}
+                            className="px-3 py-1 bg-gray-50 group-hover:bg-gray-100 
+                                     rounded-full text-sm text-gray-600 transition-colors"
+                          >
+                            {type.charAt(0).toUpperCase() + type.slice(1)}
                           </span>
-                          <span className="text-sm font-medium text-gray-900">
-                            ${item.price.toFixed(2)}
-                          </span>
+                        ))}
+                      </div>
+
+                      {/* University Affiliations */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {restaurant.nearestUniversity.map((university, index) => (
+                          <div 
+                            key={index}
+                            className="inline-flex items-center gap-2 px-3 py-1.5 
+                                     bg-blue-50 group-hover:bg-blue-100 rounded-lg transition-colors"
+                          >
+                            <School className="w-4 h-4 text-blue-600" />
+                            <span className="text-sm font-medium text-blue-700">
+                              {university}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Delivery Services - Enhanced */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Bike className="h-4 w-4 text-gray-500" />
+                        <div className="flex flex-wrap gap-2">
+                          {restaurant.delivery.doordash && (
+                            <span className="px-3 py-1 bg-red-50 text-red-700 rounded-full text-xs font-medium
+                                           group-hover:bg-red-100 transition-colors">
+                              DoorDash
+                            </span>
+                          )}
+                          {restaurant.delivery.ubereats && (
+                            <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium
+                                           group-hover:bg-green-100 transition-colors">
+                              UberEats
+                            </span>
+                          )}
+                          {restaurant.delivery.grubhub && (
+                            <span className="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-medium
+                                           group-hover:bg-orange-100 transition-colors">
+                              GrubHub
+                            </span>
+                          )}
+                          {restaurant.delivery.inhouse && (
+                            <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium
+                                           group-hover:bg-blue-100 transition-colors flex items-center gap-1">
+                              <UtensilsCrossed className="h-3 w-3" />
+                              In-house
+                            </span>
+                          )}
                         </div>
-                      ))}
+                      </div>
+
+                      {/* Popular Items - Enhanced */}
+                      <div className="mt-6">
+                        <h3 className="font-semibold text-gray-900 mb-3">Popular Items</h3>
+                        <div className="space-y-2">
+                          {restaurant.menuItems
+                            .filter(item => 
+                              !nameSearch || 
+                              item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
+                              item.description.toLowerCase().includes(nameSearch.toLowerCase()) ||
+                              restaurant.name.toLowerCase().includes(nameSearch.toLowerCase())
+                            )
+                            .slice(0, 3)
+                            .map(item => (
+                              <div 
+                                key={item.name} 
+                                className="flex justify-between items-center py-1 group-hover:bg-gray-50 
+                                          rounded-lg transition-colors px-2"
+                              >
+                                <span className={`text-sm text-gray-700 ${
+                                  nameSearch && 
+                                  (item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
+                                   item.description.toLowerCase().includes(nameSearch.toLowerCase()))
+                                    ? "bg-yellow-100 px-1 rounded"
+                                    : ""
+                                }`}>
+                                  {item.name}
+                                </span>
+                                <span className="text-sm font-medium text-gray-900">
+                                  ${item.price.toFixed(2)}
+                                </span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+              
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">All Restaurants</h2>
+            </>
+          )}
+
+          {/* Existing restaurant grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredRestaurants.map(restaurant => (
+              <Card 
+                key={restaurant.id} 
+                className="group hover:shadow-lg transition-all duration-200 cursor-pointer 
+                           bg-white border-gray-100 hover:-translate-y-1"
+                onClick={() => handleRestaurantClick(restaurant.id)}
+              >
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex justify-between items-start">
+                    <span className="text-lg font-semibold text-gray-900">{restaurant.name}</span>
+                    <span className="flex items-center gap-1 bg-gray-50 group-hover:bg-gray-100 
+                                   px-3 py-1 rounded-full text-sm font-medium transition-colors">
+                      <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                      {restaurant.rating}
+                    </span>
+                  </CardTitle>
+                  
+                  {/* Location and Distance */}
+                  <div className="flex items-center text-gray-600 text-sm mt-2">
+                    <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">{restaurant.address} ({restaurant.distance})</span>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                </CardHeader>
+
+                <CardContent>
+                  {/* Cuisine Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {restaurant.cuisine.map(type => (
+                      <span
+                        key={type}
+                        className="px-3 py-1 bg-gray-50 group-hover:bg-gray-100 
+                                 rounded-full text-sm text-gray-600 transition-colors"
+                      >
+                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* University Affiliations */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {restaurant.nearestUniversity.map((university, index) => (
+                      <div 
+                        key={index}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 
+                                 bg-blue-50 group-hover:bg-blue-100 rounded-lg transition-colors"
+                      >
+                        <School className="w-4 h-4 text-blue-600" />
+                        <span className="text-sm font-medium text-blue-700">
+                          {university}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Delivery Services - Enhanced */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Bike className="h-4 w-4 text-gray-500" />
+                    <div className="flex flex-wrap gap-2">
+                      {restaurant.delivery.doordash && (
+                        <span className="px-3 py-1 bg-red-50 text-red-700 rounded-full text-xs font-medium
+                                       group-hover:bg-red-100 transition-colors">
+                          DoorDash
+                        </span>
+                      )}
+                      {restaurant.delivery.ubereats && (
+                        <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium
+                                       group-hover:bg-green-100 transition-colors">
+                          UberEats
+                        </span>
+                      )}
+                      {restaurant.delivery.grubhub && (
+                        <span className="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-medium
+                                       group-hover:bg-orange-100 transition-colors">
+                          GrubHub
+                        </span>
+                      )}
+                      {restaurant.delivery.inhouse && (
+                        <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium
+                                       group-hover:bg-blue-100 transition-colors flex items-center gap-1">
+                          <UtensilsCrossed className="h-3 w-3" />
+                          In-house
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Popular Items - Enhanced */}
+                  <div className="mt-6">
+                    <h3 className="font-semibold text-gray-900 mb-3">Popular Items</h3>
+                    <div className="space-y-2">
+                      {restaurant.menuItems
+                        .filter(item => 
+                          !nameSearch || 
+                          item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
+                          item.description.toLowerCase().includes(nameSearch.toLowerCase()) ||
+                          restaurant.name.toLowerCase().includes(nameSearch.toLowerCase())
+                        )
+                        .slice(0, 3)
+                        .map(item => (
+                          <div 
+                            key={item.name} 
+                            className="flex justify-between items-center py-1 group-hover:bg-gray-50 
+                                      rounded-lg transition-colors px-2"
+                          >
+                            <span className={`text-sm text-gray-700 ${
+                              nameSearch && 
+                              (item.name.toLowerCase().includes(nameSearch.toLowerCase()) ||
+                               item.description.toLowerCase().includes(nameSearch.toLowerCase()))
+                                ? "bg-yellow-100 px-1 rounded"
+                                : ""
+                            }`}>
+                              {item.name}
+                            </span>
+                            <span className="text-sm font-medium text-gray-900">
+                              ${item.price.toFixed(2)}
+                            </span>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </>
       ) : (
         <div>
           <div style={{ height: '400px', width: '100%' }}>
