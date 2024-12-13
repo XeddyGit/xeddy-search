@@ -78,8 +78,27 @@ export function EDealButton({ restaurantName, dealDetails }: EDealButtonProps) {
 
   return (
     <div>
-      <button onClick={handleOpenModal} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-        Fuel Up ⚡ for Finals Deal
+      <button 
+        onClick={handleOpenModal} 
+        className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 
+          bg-gradient-to-r from-orange-500 to-orange-600 
+          hover:from-orange-600 hover:to-orange-700
+          text-white text-lg font-semibold rounded-xl
+          shadow-lg hover:shadow-xl
+          transform hover:-translate-y-0.5 
+          transition-all duration-200
+          animate-pulse hover:animate-none
+          focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+      >
+        <span className="relative">
+          Fuel Up ⚡ for Finals Deal
+        </span>
+        <span className="absolute right-3 top-1/2 transform -translate-y-1/2 
+          opacity-0 group-hover:opacity-100 group-hover:translate-x-1
+          transition-all duration-200"
+        >
+          →
+        </span>
       </button>
       <NewModal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="p-6 max-w-md w-full">

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { restaurants } from '../RestaurantDirectory/data/index';
 import PageLayout from '../layout/PageLayout';
-import { CreditCard, School } from 'lucide-react';
+import { CreditCard, School, MapPin, Star } from 'lucide-react';
 import { EDealButton } from '../EmailDealButton/EDealButton';
 
 const RestaurantDetails = () => {
@@ -44,69 +44,73 @@ const RestaurantDetails = () => {
       searchValue={menuSearch}
       onSearchChange={setMenuSearch}
     >
-      <Card>
+      <Card className="overflow-hidden bg-white shadow-lg">
         {restaurant.imageUrl && (
-          <div className="relative w-full h-64 mb-4">
+          <div className="relative h-72 w-full">
             <img
               src={restaurant.imageUrl}
               alt={restaurant.name}
-              className="w-full h-full object-cover rounded-t-lg"
+              className="h-full w-full object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           </div>
         )}
 
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold">{restaurant.name}</CardTitle>
+        <CardHeader className="space-y-6">
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <CreditCard className="w-4 h-4 text-gray-500" />
-              <span className="text-sm font-medium text-gray-800">
-                {restaurant.acceptsCampusCard ? 'Accepts Campus Card' : 'No Campus Card'}
-              </span>
-            </div>
+            <CardTitle className="text-4xl font-bold tracking-tight">{restaurant.name}</CardTitle>
+            
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2">
+                <CreditCard className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-medium text-blue-700">
+                  {restaurant.acceptsCampusCard ? 'Accepts Campus Card' : 'No Campus Card'}
+                </span>
+              </div>
 
-            <div className="flex flex-wrap gap-2">
               {restaurant.nearestUniversity.map((university: string, index: number) => (
                 <div 
                   key={index}
-                  className="inline-flex items-center space-x-2 px-2 py-1 bg-blue-100 rounded-md"
+                  className="flex items-center gap-2 rounded-full bg-orange-50 px-4 py-2"
                 >
-                  <School className="w-4 h-4 text-blue-600" />
-                  <span className="text-sm font-medium text-blue-600">
+                  <School className="h-4 w-4 text-orange-600" />
+                  <span className="text-sm font-medium text-orange-700">
                     {university}
                   </span>
                 </div>
               ))}
-              {restaurant.hasDeals && restaurant.currentDeal && (
-        <EDealButton 
-          restaurantName={restaurant.name}
-          dealDetails={restaurant.currentDeal}
-        />
-      )}
             </div>
 
-            <div className="space-y-2">
-              <div className="address">
-                <a 
-                  href={restaurant.addressLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.address)}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-blue-600 hover:underline"
-                >
-                  {restaurant.address}
-                </a>
+            {restaurant.hasDeals && restaurant.currentDeal && (
+              <div className="mt-4">
+                <EDealButton 
+                  restaurantName={restaurant.name}
+                  dealDetails={restaurant.currentDeal}
+                />
               </div>
-        
-              <div className="flex items-center space-x-2">
-                <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
-                  ★ {restaurant.rating}
+            )}
+
+            <div className="space-y-4 pt-4">
+              <a 
+                href={restaurant.addressLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.address)}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                <MapPin className="h-4 w-4" />
+                {restaurant.address}
+              </a>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <span className="inline-flex items-center gap-1 rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800">
+                  <Star className="h-4 w-4" fill="currentColor" />
+                  {restaurant.rating}
                 </span>
-              </div>
-              <div className="flex flex-wrap gap-2 mt-2">
+
                 {restaurant.cuisine.map(type => (
                   <span
                     key={type}
-                    className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
+                    className="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600"
                   >
                     {type.charAt(0).toUpperCase() + type.slice(1)}
                   </span>
@@ -115,57 +119,51 @@ const RestaurantDetails = () => {
             </div>
           </div>
         </CardHeader>
+
         <CardContent>
-          <h2 className="text-2xl font-bold mb-6">Menu Items</h2>
-          
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">
-                Popular Items
-              </h3>
-              
-              {filteredMenuItems.map(item => (
-                <div key={item.name} className="border-b pb-4 last:border-b-0">
-                  <div className="flex gap-4">
-                    {/* Image Container */}
-                    {item.imageUrl && !imageErrors[item.name] && (
-                      <div className="flex-shrink-0 w-24 h-24">
-                        <img
-                          src={item.imageUrl}
-                          alt={item.name}
-                          className="w-full h-full rounded-lg object-cover"
-                          onError={() => handleImageError(item.name)}
-                        />
-                      </div>
-                    )}
-                    
-                    {/* Item Details */}
-                    <div className="flex-grow">
-                      <div className="flex justify-between items-start">
-                        <div className="space-y-1">
-                          <h3 className="font-medium">{item.name}</h3>
-                          <p className="text-sm text-gray-600">{item.description}</p>
+              <h2 className="text-2xl font-bold text-gray-900">Menu Items</h2>
+              <div className="mt-6 divide-y divide-gray-200">
+                {filteredMenuItems.map(item => (
+                  <div key={item.name} className="py-6 first:pt-0 last:pb-0">
+                    <div className="flex gap-6">
+                      {item.imageUrl && !imageErrors[item.name] && (
+                        <div className="flex-none">
+                          <img
+                            src={item.imageUrl}
+                            alt={item.name}
+                            className="h-24 w-24 rounded-lg object-cover"
+                            onError={() => handleImageError(item.name)}
+                          />
                         </div>
-                        <div className="text-gray-700 font-semibold ml-4">
-                          {item.largePrice ? (
-                            <div className="text-right">
-                              <div>9" ${item.price.toFixed(2)}</div>
-                              <div>12" ${item.largePrice.toFixed(2)}</div>
-                            </div>
-                          ) : (
-                            <div>${item.price.toFixed(2)}</div>
-                          )}
+                      )}
+                      <div className="flex flex-1 flex-col">
+                        <div className="flex justify-between">
+                          <div className="space-y-1">
+                            <h3 className="text-lg font-medium text-gray-900">{item.name}</h3>
+                            <p className="text-sm text-gray-500">{item.description}</p>
+                          </div>
+                          <div className="text-right">
+                            {item.largePrice ? (
+                              <div className="space-y-1">
+                                <div className="text-sm text-gray-500">9" ${item.price.toFixed(2)}</div>
+                                <div className="font-medium text-gray-900">12" ${item.largePrice.toFixed(2)}</div>
+                              </div>
+                            ) : (
+                              <div className="font-medium text-gray-900">${item.price.toFixed(2)}</div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
-
     </PageLayout>
   );
 };
