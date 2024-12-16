@@ -1,5 +1,5 @@
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Restaurant } from './RestaurantDirectory/types';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,13 +21,13 @@ const universityCoordinates: Record<string, { lat: number; lng: number }> = {
 function MapView({ restaurants, selectedUniversity }: MapViewProps) {
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
 
-  // Default center (e.g., Washington DC area)
-  const defaultCenter = {
+  const defaultCenter = useMemo(() => ({
     lat: 38.9072,
     lng: -77.0369
-  };
+  }), []);
 
   // Update map center and zoom when university changes
   useEffect(() => {
@@ -42,7 +42,45 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
 
   const onLoad = (map: google.maps.Map): void => {
     setMapRef(map);
+    setIsLoaded(true);
   };
+
+  // Memoize university marker
+  const universityMarker = useMemo(() => {
+    if (!isLoaded) return null;
+    
+    if (selectedUniversity !== 'All Universities' && universityCoordinates[selectedUniversity]) {
+      return (
+        <Marker
+          position={universityCoordinates[selectedUniversity]}
+          icon={{
+            url: '', // Add your custom university marker icon
+            scaledSize: new window.google.maps.Size(80, 40)
+          }}
+        />
+      );
+    }
+    return null;
+  }, [selectedUniversity, isLoaded]);
+
+  // Memoize restaurant markers
+  const restaurantMarkers = useMemo(() => {
+    if (!isLoaded) return null;
+
+    return restaurants.map((restaurant) => (
+      <Marker
+        key={restaurant.id}
+        position={{
+          lat: restaurant.latitude,
+          lng: restaurant.longitude
+        }}
+        onClick={() => setSelectedRestaurant(restaurant)}
+        options={{
+          optimized: true
+        }}
+      />
+    ));
+  }, [restaurants, isLoaded]);
 
   return (
     <GoogleMap
@@ -61,28 +99,8 @@ function MapView({ restaurants, selectedUniversity }: MapViewProps) {
         zoomControl: true,
       }}
     >
-      {/* University Marker */}
-      {selectedUniversity !== 'All Universities' && universityCoordinates[selectedUniversity] && (
-        <Marker
-          position={universityCoordinates[selectedUniversity]}
-          icon={{
-            url: '', // Add your custom university marker icon
-            scaledSize: new window.google.maps.Size(80, 40)
-          }}
-        />
-      )}
-
-      {/* Restaurant Markers */}
-      {restaurants.map((restaurant) => (
-        <Marker
-          key={restaurant.id}
-          position={{
-            lat: restaurant.latitude,
-            lng: restaurant.longitude
-          }}
-          onClick={() => setSelectedRestaurant(restaurant)}
-        />
-      ))}
+      {universityMarker}
+      {restaurantMarkers}
 
       {/* Info Window */}
       {selectedRestaurant && (
