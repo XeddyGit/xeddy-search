@@ -1,18 +1,20 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // Import required icons
-import { MapPin, School, Bike, UtensilsCrossed, List, Map, Star } from 'lucide-react';
+import { MapPin, School, Bike, UtensilsCrossed, List, Map, Star, X } from 'lucide-react';
 // Import UI components
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 // Import data from data.ts
 import { restaurants, universities, cuisineTypes } from './data/index';
 import PageLayout from '../layout/PageLayout';
 import MapView from '../MapView';
-
+import SignupModal from '../MailerLiteModal';
 
 // Main component
 const RestaurantDirectory = () => {
   const navigate = useNavigate();
+  const [showBanner, setShowBanner] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   // Google Analytics Integration
   useEffect(() => {
@@ -85,6 +87,38 @@ const RestaurantDirectory = () => {
       searchValue={nameSearch}
       onSearchChange={(value) => setNameSearch(value)}
     >
+      {/* Sticky Deals Banner */}
+      {showBanner && (
+        <div className="sticky top-0 z-50 mb-6">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 rounded-lg shadow-lg">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div>
+                  <h3 className="font-semibold text-lg">Want exclusive student deals?</h3>
+                  <p className="text-blue-100">Join OCD Deals to get special offers from local restaurants!</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium 
+                           hover:bg-blue-50 transition-colors duration-200"
+                >
+                  Sign Up Now
+                </button>
+                <button
+                  onClick={() => setShowBanner(false)}
+                  className="text-blue-100 hover:text-white transition-colors"
+                  aria-label="Dismiss banner"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Filter Section with Search */}
       <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
         {/* Filters Row */}
@@ -424,6 +458,11 @@ const RestaurantDirectory = () => {
           </div>
         </div>
       )}
+
+      <SignupModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </PageLayout>
   );
 };

@@ -29,29 +29,29 @@ export const restaurants = [
 
 export const universities = [
     "All Universities",
-    "Georgetown University",
     "American University",
-    "Howard University", 
-    "George Washington University", 
-    "University of Maryland Baltimore County", 
-    "Towson University", 
+    "George Washington University",
+    "Georgetown University",
+    "Howard University",
+    "Towson University",
+    "University of Maryland Baltimore County"
 ];
 
 export const cuisineTypes = [
     "All Cuisines",
     "american",
-    "appetizers", 
-    "comfort food",
-    "pizza",
-    "italian",
-    "mexican",
-    "tacos",
-    "persian",
-    "kabobs",
-    "tea",
+    "appetizers",
     "coffee",
-    "seafood",
-    "ramen",
+    "comfort food",
+    "fast food",
+    "italian",
     "japanese",
-    "fast food"
+    "kabobs",
+    "mexican",
+    "persian",
+    "pizza",
+    "ramen",
+    "seafood",
+    "tacos",
+    "tea"
 ];
