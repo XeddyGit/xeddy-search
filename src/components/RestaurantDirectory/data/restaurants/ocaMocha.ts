@@ -61,7 +61,7 @@ export const ocaMocha: Restaurant = {
     grubhub: false,
     inhouse: false
   },
-  hasDeals: true,
+  hasDeals: false,
   currentDeal: [
     {
       dealType: "percentage",
