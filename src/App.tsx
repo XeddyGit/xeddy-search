@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, version } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LoadScript, Libraries } from '@react-google-maps/api';
+import Hotjar from '@hotjar/browser';
 import HomePage from './components/Screen/HomePage'
 import RestaurantDirectory from './components/RestaurantDirectory';
 import RestaurantDetails from './components/RestaurantDetails';
@@ -10,11 +11,15 @@ import './index.css';
 import ReactGA from 'react-ga4';
 
 const libraries: Libraries = ['places'];
+const HOTJAR_SITE_ID = 5243672;
+const HOTJAR_VERSION = 6;
 
 function App() {
   useEffect(() => {
     ReactGA.initialize('G-M4M7D5SNCX');
     ReactGA.send('pageview');
+
+    Hotjar.init(HOTJAR_SITE_ID, HOTJAR_VERSION);
   }, []);
 
   return (
