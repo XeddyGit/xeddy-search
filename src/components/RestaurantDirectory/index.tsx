@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 // Import required icons
 import { MapPin, School, Bike, UtensilsCrossed, List, Map, Star, X } from 'lucide-react';
 // Import UI components
@@ -13,6 +13,8 @@ import SignupModal from '../MailerLiteModal';
 // Main component
 const RestaurantDirectory = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const universityParam = searchParams.get('university');
   const [showBanner, setShowBanner] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
@@ -40,9 +42,18 @@ const RestaurantDirectory = () => {
 
   // State management for filters and searches
   const [nameSearch, setNameSearch] = useState("");
-  const [selectedUniversity, setSelectedUniversity] = useState("All Universities");
+  const [selectedUniversity, setSelectedUniversity] = useState(
+    universityParam || "All Universities"
+  );
   const [selectedCuisine, setSelectedCuisine] = useState("All Cuisines");
   const [view, setView] = useState<'list' | 'map'>('list');
+
+  // Set initial university filter from URL params
+  useEffect(() => {
+    if (universityParam) {
+      setSelectedUniversity(universityParam);
+    }
+  }, [universityParam]);
 
   // Filter restaurants based on all criteria
   const filteredRestaurants = useMemo(() => {

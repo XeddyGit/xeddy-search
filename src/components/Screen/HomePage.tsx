@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import SignupModal from '../MailerLiteModal';
+import MasterSearch from '../MasterSearch';
+import { restaurants, universities } from '../RestaurantDirectory/data/index';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -43,14 +45,16 @@ const HomePage: React.FC = () => {
           <h1 className="text-6xl font-bold mb-4">Local food,<span className="text-black"> your campus card.</span></h1>
           <p className="text-lg mb-6">Most universities don't highlight all the spots in the city you can use your campus card. So, we did.</p>
           
-          <div className="flex flex-col items-center gap-4 w-full max-w-md">
-            <button 
+          <MasterSearch restaurants={restaurants} universities={universities} />
+
+           <div className="flex flex-col items-center gap-4 w-full max-w-md">
+            {/*<button 
               onClick={() => setIsModalOpen(true)}
               className="bg-green-600 text-white py-4 px-8 rounded-lg w-full 
                        hover:bg-green-700 transition duration-200 text-lg font-semibold"
             >
               Sign Up for Deals
-            </button>
+            </button> */}
 
             <button 
               onClick={() => navigate('/directory')} 
@@ -60,7 +64,7 @@ const HomePage: React.FC = () => {
             >
               Go to Directory
             </button>
-          </div>
+          </div> 
         </div>
       </div>
 
