@@ -10,6 +10,7 @@ import PageLayout from '../layout/PageLayout';
 import MapView from '../MapView';
 import SignupModal from '../MailerLiteModal';
 
+
 // Main component
 const RestaurantDirectory = () => {
   const navigate = useNavigate();

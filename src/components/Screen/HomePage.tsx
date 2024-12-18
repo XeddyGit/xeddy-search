@@ -23,18 +23,63 @@ const HomePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Burger Menu Icon */}
-        <button onClick={toggleMenu} className="md:hidden focus:outline-none">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
+        {/* Animated Hamburger Menu Icon */}
+        <button 
+          onClick={toggleMenu} 
+          className="md:hidden focus:outline-none relative w-8 h-8 flex items-center justify-center"
+          aria-label="Toggle menu"
+        >
+          <div className="relative">
+            <span 
+              className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-out
+              ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}
+            />
+            <span 
+              className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-out mt-1.5
+              ${isMenuOpen ? 'opacity-0' : ''}`}
+            />
+            <span 
+              className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-out mt-1.5
+              ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}
+            />
+          </div>
         </button>
 
         {/* Navigation Links */}
-        <nav className={`flex-col md:flex-row md:flex md:space-x-4 ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
-          <Link to="/" className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors">Home</Link>
-          <Link to="/about" className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors">About</Link>
-          <Link to="/contact" className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors">Contact</Link>
+        <nav className={`
+          ${isMenuOpen 
+            ? 'absolute top-full left-0 right-0 bg-blue-600 p-4 space-y-2 shadow-lg md:relative md:bg-transparent md:p-0 md:shadow-none' 
+            : 'hidden'
+          } 
+          md:flex md:space-y-0 md:space-x-4 md:items-center
+        `}>
+          <Link 
+            to="/directory" 
+            className="block md:inline-flex items-center px-4 py-2 rounded-lg 
+                      text-white hover:bg-blue-700 hover:text-white 
+                      transition-all duration-200 font-medium
+                      border border-transparent hover:border-blue-400"
+          >
+            Directory
+          </Link>
+          <Link 
+            to="/about" 
+            className="block md:inline-flex items-center px-4 py-2 rounded-lg 
+                      text-white hover:bg-blue-700 hover:text-white 
+                      transition-all duration-200 font-medium
+                      border border-transparent hover:border-blue-400"
+          >
+            About
+          </Link>
+          <Link 
+            to="/contact" 
+            className="block md:inline-flex items-center px-4 py-2 rounded-lg 
+                      text-white hover:bg-blue-700 hover:text-white 
+                      transition-all duration-200 font-medium
+                      border border-transparent hover:border-blue-400"
+          >
+            Contact
+          </Link>
         </nav>
       </header>
 

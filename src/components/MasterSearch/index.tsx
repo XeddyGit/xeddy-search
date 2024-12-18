@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Restaurant } from '../RestaurantDirectory/types';
 
@@ -7,10 +7,95 @@ interface SearchBarProps {
   universities: string[];
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ restaurants, universities }) => {
+const MasterSearch: React.FC<SearchBarProps> = ({ restaurants, universities }) => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchResults, setSearchResults] = useState<(Restaurant | string)[]>([]);
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+
+  const placeholders = [
+    "I'm a student at...",
+    "I'm hungry for...",
+    "The best pizza in..."
+  ];
+
+  useEffect(() => {
+    let currentText = '';
+    let currentIndex = 0;
+    let isDeleting = false;
+    let timeout: NodeJS.Timeout;
+
+    const type = () => {
+      const currentPhrase = placeholders[placeholderIndex];
+      
+      if (isDeleting) {
+        currentText = currentPhrase.substring(0, currentIndex - 1);
+        currentIndex--;
+      } else {
+        currentText = currentPhrase.substring(0, currentIndex + 1);
+        currentIndex++;
+      }
+
+      setCurrentPlaceholder(currentText);
+
+      let typingSpeed = isDeleting ? 50 : 100;
+
+      if (!isDeleting && currentIndex === currentPhrase.length) {
+        // Pause at the end of typing
+        typingSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && currentText === '') {
+        isDeleting = false;
+        setPlaceholderIndex((prev) => (prev + 1) % placeholders.length);
+        currentIndex = 0;
+        typingSpeed = 500;
+      }
+
+      timeout = setTimeout(type, typingSpeed);
+    };
+
+    timeout = setTimeout(type, 100);
+
+    return () => clearTimeout(timeout);
+  }, [placeholderIndex]);
+
+  const parseNaturalLanguageQuery = (query: string) => {
+    query = query.toLowerCase();
+    
+    // Extract key information from the query
+    const universityMatch = universities.find(uni => 
+      query.includes(uni.toLowerCase()) && uni !== "All Universities"
+    );
+    
+    // Check for cuisine types
+    const commonCuisineTypes = ['pizza', 'burger', 'sushi', 'chinese', 'italian', 'mexican'];
+    const cuisineMatch = commonCuisineTypes.find(cuisine => 
+      query.includes(cuisine.toLowerCase())
+    );
+    
+    // Check for qualifiers
+    const hasQualityIndicator = query.includes('best') || query.includes('top') || query.includes('highest rated');
+    
+    // Filter and sort results
+    let results = restaurants.filter((restaurant: Restaurant) => {
+      const matchesCuisine = cuisineMatch ? 
+        restaurant.cuisine.some(type => type.toLowerCase().includes(cuisineMatch)) : true;
+      
+      const matchesUniversity = universityMatch ? 
+        restaurant.nearestUniversity.some(uni => uni.toLowerCase() === universityMatch.toLowerCase()) : true;
+      
+      return matchesCuisine && matchesUniversity;
+    });
+
+    // Sort by rating if looking for "best"
+    if (hasQualityIndicator) {
+      results = results.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    }
+
+    return results;
+  };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -21,10 +106,23 @@ const SearchBar: React.FC<SearchBarProps> = ({ restaurants, universities }) => {
       return;
     }
 
-    // Filter results based on the search term
+    // Check if the query looks like a natural language question
+    if (value.includes('?') || 
+        value.toLowerCase().includes('what') || 
+        value.toLowerCase().includes('where') ||
+        value.toLowerCase().includes('best') ||
+        value.toLowerCase().includes('near')) {
+      // Handle as natural language query
+      const results = parseNaturalLanguageQuery(value);
+      setSearchResults(results);
+      return;
+    }
+
+    // Regular search logic for non-question queries
     const filteredRestaurants = restaurants.filter((restaurant: Restaurant) =>
       restaurant.name.toLowerCase().includes(value.toLowerCase()) ||
-      restaurant.menuItems.some(item => item.name.toLowerCase().includes(value.toLowerCase()))
+      restaurant.menuItems.some(item => item.name.toLowerCase().includes(value.toLowerCase())) ||
+      restaurant.cuisine.some(type => type.toLowerCase().includes(value.toLowerCase()))
     );
 
     const filteredUniversities = universities
@@ -51,7 +149,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ restaurants, universities }) => {
     <div className="relative w-full max-w-4xl mb-8">
       <input
         type="text"
-        placeholder="Search for restaurants, menu items, or universities..."
+        placeholder={currentPlaceholder}
         value={searchTerm}
         onChange={handleSearchChange}
         className="p-4 text-lg rounded-full w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-lg transition duration-200 text-black"
@@ -101,4 +199,4 @@ const SearchBar: React.FC<SearchBarProps> = ({ restaurants, universities }) => {
   );
 };
 
-export default SearchBar;
+export default MasterSearch;
