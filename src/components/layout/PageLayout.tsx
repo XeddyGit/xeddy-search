@@ -33,17 +33,12 @@ const PageLayout = ({
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="bg-blue-600 text-white p-1 shadow-lg relative z-50">
-        <div className="container mx-auto">
-          <div className="flex justify-between items-center">
-            {/* Logo Section */}
-            <div 
-              className="flex items-center gap-3 cursor-pointer" 
-              onClick={() => navigate('/')} 
-              role="button" 
-              tabIndex={0}
-            >
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-blue-600 text-white relative z-50">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo and Powered By */}
+            <div className="flex items-center">
               <span className="font-bold text-lg">Powered by</span>
               <div className="flex-shrink-0 w-24 h-24">
                 <img 
