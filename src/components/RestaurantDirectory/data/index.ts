@@ -11,6 +11,10 @@ import { ocaMocha } from './restaurants/ocaMocha';
 import { sorrentoOfArbutus } from './restaurants/sorrentoOfArbutus';
 import { akiraRamenTowson } from './restaurants/akiraRamenTowson';
 import { kyotoMatcha } from './restaurants/kyotoMatcha';
+import { capoDeli } from './restaurants/capoDeli';
+import { captainCookie } from './restaurants/captainCookie';
+import { magicGourd } from './restaurants/magicGourd';
+import { surfSide } from './restaurants/surfSide';
 export const restaurants = [
   wingos,
   angelicoPizzeria,
@@ -24,7 +28,11 @@ export const restaurants = [
   ocaMocha,
   sorrentoOfArbutus,
   akiraRamenTowson, 
-  kyotoMatcha
+  kyotoMatcha,
+  capoDeli,
+  captainCookie,
+  magicGourd,
+  surfSide
 ];
 
 export const universities = [
@@ -53,5 +61,9 @@ export const cuisineTypes = [
     "ramen",
     "seafood",
     "tacos",
-    "tea"
+    "tea",
+    "deli",
+    "cookies",
+    "ice cream",
+    "chinese",
 ];

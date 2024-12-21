@@ -1,0 +1,78 @@
+import { Restaurant } from "../../types";
+
+export const magicGourd: Restaurant = {
+  name: "Magic Gourd Restaurant",
+  imageUrl: "https://i.imgur.com/lnqBWEV.jpeg",
+  cuisine: ["Chinese"],
+  address: "2000 Pennsylvania Ave NW Suite 1-A, Washington, DC 20006",
+  nearestUniversity: ["George Washington University"],
+  latitude: 38.9000,
+  longitude: -77.0455,
+  acceptsCampusCard: true,
+  distance: "0.5 miles",
+  rating: 4.5,
+  id: 16,
+  menuItems: [
+    // Appetizers
+    { "name": "Shrimp Egg Roll (2)", "price": 4.50, "description": "" },
+    { "name": "Vegetarian Spring Roll (2)", "price": 4.50, "description": "" },
+    { "name": "Fried Wontons", "price": 5.95, "description": "" },
+    { "name": "Steak and Cheese Roll (2)", "price": 6.50, "description": "" },
+    { "name": "Scallion Pancake", "price": 6.45, "description": "" },
+    { "name": "Edamame", "price": 5.95, "description": "" },
+    { "name": "Dan Dan Noodle", "price": 6.95, "description": "" },
+    { "name": "Steamed Pork Dumplings", "price": 8.95, "description": "" },
+    { "name": "Fried Pork Dumplings", "price": 8.95, "description": "" },
+    { "name": "Steamed Veggies Dumplings", "price": 8.95, "description": "" },
+    { "name": "Fried Veggies Dumplings", "price": 8.95, "description": "" },
+    { "name": "Fried Chicken Wings (8)", "price": 10.95, "description": "" },
+    { "name": "Crab Rangoons (6)", "price": 8.95, "description": "" },
+    { "name": "Chinese Style Beef Kebab", "price": 9.95, "description": "" },
+    { "name": "Chinese Style Chicken Kebab", "price": 8.95, "description": "" },
+    { "name": "Boiled Dumpling in Hot Sauce (10)", "price": 8.95, "description": "" },
+
+    // Soups
+    { "name": "Wonton Soup", "price": 3.50, "description": "" },
+    { "name": "Egg Drop Soup", "price": 3.50, "description": "" },
+    { "name": "Hot and Sour Soup", "price": 3.50, "description": "" },
+    { "name": "Vegetable & Bean Curd Soup (for 2)", "price": 6.95, "description": "" },
+    { "name": "Chicken & Corn Soup (for 2)", "price": 8.95, "description": "" },
+    { "name": "Seafood Soup (for 2)", "price": 12.95, "description": "" },
+    { "name": "San Shein Soup (for 2)", "price": 14.95, "description": "" },
+    { "name": "Seafood Tom Yum Soup (for 2)", "price": 14.95, "description": "" },
+
+    // Pork
+    { "name": "Twice Cooked Pork", "price": 17.95, "description": "" },
+    { "name": "Moo Shi Pork", "price": 17.95, "description": "" },
+    { "name": "Sweet & Sour Pork", "price": 17.95, "description": "" },
+    { "name": "Pork with Garlic Sauce", "price": 17.95, "description": "" },
+    { "name": "Mongolian Pork", "price": 17.95, "description": "" },
+    { "name": "Roast Pork with Mixed Vegetables", "price": 17.95, "description": "" },
+    { "name": "Pork with Dry Bean Curd", "price": 18.95, "description": "" },
+
+    // Chef's Specialties
+    { "name": "Thai Basil Chicken", "price": 16.95, "description": "" },
+    { "name": "Thai Basil Tofu", "price": 16.95, "description": "" },
+    { "name": "Crispy Chicken", "price": 18.95, "description": "" },
+    { "name": "Crispy Beef", "price": 20.95, "description": "" },
+    { "name": "Firecracker Shrimp", "price": 20.95, "description": "" },
+    { "name": "Seafood Delight", "price": 22.95, "description": "" },
+    { "name": "Happy Family", "price": 22.95, "description": "" },
+    { "name": "Crispy Shrimp with Pineapple", "price": 20.95, "description": "" },
+    { "name": "Salt and Pepper Shrimp", "price": 20.95, "description": "" },
+    { "name": "Salt and Pepper Squid", "price": 20.95, "description": "" },
+    { "name": "General Tso's Shrimp", "price": 20.95, "description": "" },
+    { "name": "Imperial Shrimp & Scallops", "price": 22.95, "description": "" },
+    { "name": "Shrimp & Scallops w/ Garlic Sauce", "price": 22.95, "description": "" },
+    { "name": "Kung Pao Delight", "price": 22.95, "description": "" },
+    { "name": "Kung Pao Trio", "price": 22.95, "description": "" },
+    { "name": "Squid with Black Bean Sauce", "price": 20.95, "description": "" }
+  ],
+  delivery: {
+    doordash: true,
+    ubereats: true,
+    grubhub: true,
+    inhouse: true,
+  },
+  hasDeals: false,
+};
