@@ -28,8 +28,10 @@ const PageLayout = ({
   };
 
   useEffect(() => {
-    ReactGA.initialize('G-M4M7D5SNCX'); // Replace with your tracking ID
-    ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
+    const hasAcceptedCookies = localStorage.getItem('cookiesAccepted');
+    if (hasAcceptedCookies === 'true') {
+      ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
+    }
   }, []);
 
   return (

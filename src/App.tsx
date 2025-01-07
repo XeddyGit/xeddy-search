@@ -9,6 +9,7 @@ import AboutPage from './components/Screen/AboutPage';
 import ContactPage from './components/Screen/ContactPage';
 import './index.css';
 import ReactGA from 'react-ga4';
+import CookieBanner from './components/CookieBanner';
 
 const libraries: Libraries = ['places'];
 const HOTJAR_SITE_ID = 5243672;
@@ -44,6 +45,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      <CookieBanner />
     </LoadScript>
   );
 }

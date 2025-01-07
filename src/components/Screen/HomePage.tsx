@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import SignupModal from '../MailerLiteModal';
 import MasterSearch from '../MasterSearch';
+import IconBar from '../IconBar';
 import { restaurants, universities } from '../RestaurantDirectory/data/index';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCuisine, setSelectedCuisine] = useState('');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -122,6 +124,7 @@ const HomePage: React.FC = () => {
             >
               Go to Directory
             </button>
+            <IconBar onCuisineSelect={(cuisine) => setSelectedCuisine(cuisine)} />
           </div> 
         </div>
       </div>

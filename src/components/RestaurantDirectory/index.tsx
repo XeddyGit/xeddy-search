@@ -91,6 +91,16 @@ const RestaurantDirectory = () => {
     navigate(`/restaurant/${restaurantId}`);
   };
 
+  // Add this useEffect hook at the top of your component
+  useEffect(() => {
+    const storedCuisine = localStorage.getItem('selectedCuisine');
+    if (storedCuisine) {
+      setSelectedCuisine(storedCuisine);
+      // Clear the stored cuisine after using it
+      localStorage.removeItem('selectedCuisine');
+    }
+  }, []);
+
   // Component render
   return (
     <PageLayout
