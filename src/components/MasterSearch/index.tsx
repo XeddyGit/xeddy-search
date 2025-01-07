@@ -16,9 +16,9 @@ const MasterSearch: React.FC<SearchBarProps> = ({ restaurants, universities }) =
   const [isTyping, setIsTyping] = useState(true);
 
   const placeholders = [
-    "I'm a student at...",
-    "I'm hungry for...",
-    "The best pizza in..."
+    "Georgetown University...",
+    "Towson University...",
+    "Howard University...",
   ];
 
   useEffect(() => {
