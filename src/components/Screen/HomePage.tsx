@@ -110,16 +110,22 @@ const HomePage: React.FC = () => {
       <div className="relative bg-cover bg-center h-screen" style={{ backgroundImage: "url('https://i.imgur.com/lfqO7fW.pngm')" }}>
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-          <h1 className="text-6xl font-bold mb-4">Local food,<span className="text-black"> your campus card.</span></h1>
-          <p className="text-lg mb-6">Most universities don't highlight all the spots in the city you can use your campus card. So, we did.</p>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
+            Local food,<span className="text-black"> your campus card.</span>
+          </h1>
+          <p className="text-base md:text-lg mb-6 max-w-sm md:max-w-lg mx-auto">
+            Most universities don't highlight all the spots in the city you can use your campus card. So, we did.
+          </p>
           
-          <MasterSearch restaurants={restaurants} universities={universities} />
+          <div className="w-full max-w-xs md:max-w-md mx-auto">
+            <MasterSearch restaurants={restaurants} universities={universities} />
+          </div>
 
-           <div className="flex flex-col items-center gap-4 w-full max-w-md">
+          <div className="flex flex-col items-center gap-4 w-full max-w-xs md:max-w-md mx-auto mt-4">
             <button 
               onClick={() => navigate('/directory')} 
-              className="bg-blue-600 text-white py-4 px-8 rounded-lg w-full 
-                       hover:bg-blue-700 transition duration-200 text-lg font-semibold 
+              className="bg-blue-600 text-white py-3 md:py-4 px-6 md:px-8 rounded-lg w-full 
+                       hover:bg-blue-700 transition duration-200 text-base md:text-lg font-semibold 
                        shadow-lg transform hover:scale-105"
             >
               Go to Directory
